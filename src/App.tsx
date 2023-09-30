@@ -1,10 +1,17 @@
 import './App.css';
+import AddPost from './components/AddPost';
+import Card from './components/Card';
+import NavBar from './components/Navbar';
 
 function App() {
   return (
-    <h1 className="text-3xl font-bold underline text-red-600">
-      Simple React Typescript Tailwind Mini Facebook
-    </h1>
+    <>
+     <NavBar/>
+     <div className='flex flex-col items-center pl-20 pr-20'>
+     <AddPost/>
+     <Card/>
+     </div>
+    </> 
   );  
 }
 
