@@ -78,8 +78,8 @@ export default function Card(){
                         alt=""
                     />
                     <div className="ml-2 mb-4">
-                        <h5 className="text-sm">Utilisateur 1</h5>
-                        <p className="text-sm">this is my first comment</p>
+                        <h5 className="text-sm dark:text-white">Utilisateur 1</h5>
+                        <p className="text-sm dark:text-white">this is my first comment</p>
                     </div>
                 </div>
             </div>
