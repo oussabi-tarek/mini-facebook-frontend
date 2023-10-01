@@ -5,7 +5,7 @@ return(
     <form>
             <div className="flex">                
                 <div className="relative w-80 h-4 mb-5">
-                    <input   className="block p-2 w-full 
+                    <input  disabled className="block p-2 w-full
                     z-20 text-sm text-gray-900 bg-gray-50 rounded-lg 
                       border-none outline-none
                     dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 
