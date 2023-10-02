@@ -3,17 +3,30 @@ import POST from '../images/post.jpg';
 import LIKE from '../images/like.png';
 import NOTLIKE from '../images/notlike.png';
 import COMMENT from '../images/comment.png';
+import EDIT from "../images/editMe.png";
+import ICONDELETE from "../images/DeleteIcon.png";
 
-export default function Card(){
+export default function PostProfile(){
     return(
         <div className="flex flex-col items-left ml-20 mr-20 bg-white border border-gray-200 rounded-lg shadow  hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
             <div className='flex flex-row m-4'>
-            <img
-                className="h-10 w-10 rounded-full"
-                src={PROFILE}
-                alt=""
-                /> 
-             <h5 className='mt-2 ml-2'>Utilisateur 1</h5>
+                <div className='flex mr-72'>
+                    <img
+                        className="h-10 w-10 rounded-full"
+                        src={PROFILE}
+                        alt=""
+                        /> 
+                    <h5 className='mt-2 ml-2'>Barry</h5>
+                </div>
+                <div className='flex m-auto justify-between'>
+                    <button className='mr-2' >
+                        <img src={EDIT} alt="edit" className='w-6 h-6' />
+                    </button>
+                    <button>
+                        <img src={ICONDELETE} alt="delete" className='w-7 h-7 bg-red' />
+                    </button>
+
+                </div>
             </div>   
             <div className='flex flex-col items-left mt-1 ml-10 mr-10'>
                 <p className='mb-3'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta sequi sit omnis aut? Neque, impedit a quidem nihil amet atque fugit aliquid repellendus sapiente quia consequatur, sint saepe delectus nam?</p>
@@ -44,15 +57,6 @@ export default function Card(){
                     <p>It's been 2 hours</p>
                 </div>
             </div>
-            
-            {/* <a href="#" className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                <img className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="/docs/images/blog/image-4.jpg" alt="" />
-                <div className="flex flex-col justify-between p-4 leading-normal">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                </div>
-            </a> */}
-           
         </div>
     );
 }
