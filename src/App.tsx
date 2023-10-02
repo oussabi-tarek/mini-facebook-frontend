@@ -1,13 +1,14 @@
 import './App.css';
-import AddPost from './components/AddPost';
-import Card from './components/Card';
-import NavBar from './components/Navbar';
+import NavBar from "./components/navBar/Navbar";
+import AddPost from "./components/homePage/AddPost";
+import Card from "./components/homePage/Card";
+
 
 function App() {
   return (
     <>
      <NavBar/>
-     <div className='flex flex-col items-center pl-20 pr-20'>
+     <div className='flex flex-col items-center pl-20 pr-20 dark:bg-black'>
      <AddPost/>
      <Card/>
      </div>

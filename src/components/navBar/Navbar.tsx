@@ -1,22 +1,23 @@
-import { Fragment } from 'react'
+import {Fragment, useEffect, useState} from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import MINIFACEBOOK from "../images/minifacebookrm.png"  
-import PROFILE from "../images/profile.png"
+import MINIFACEBOOK from "../../images/minifacebookrm.png"
+import PROFILE from "../../images/profile.png"
 import Search  from './Search'
 
-const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-]
+
 
 function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function NavBar() {
+  let [darkMode, setDarkMode] = useState(false);
+  useEffect(()=>{
+     let mode=!darkMode?'dark':'light';
+     document.documentElement.classList.toggle(mode);
+  },[darkMode])
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -45,10 +46,14 @@ export default function NavBar() {
                 </div>
                 <div >
                   <div className='mt-2'>
+                    <button onClick={()=>{
+                      setDarkMode(!darkMode)
+                    }}>
                   <label className="relative inline-flex  cursor-pointer">
                   <input type="checkbox"  value="" className="sr-only peer"/>
                   <div  className="w-11 h-6 bg-gray-200  rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px]  after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                   </label>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -88,16 +93,6 @@ export default function NavBar() {
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Your Profile
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Settings
                           </a>
                         )}
                       </Menu.Item>
