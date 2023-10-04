@@ -4,15 +4,15 @@ export default function LoginForm(){
 
     return(
         <form className="w-full max-w-sm mb-12">
-            <div className="flex items-center border-b border-gray-500 py-2 mb-5">
+            <div className="flex items-center py-2 mb-5">
                 <input 
-                    className="appearance-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                    className="appearance-none border-b border-gray-500 w-full text-gray-500 mr-3 py-3 px-2 leading-tight focus:outline-none"
                     type="text"
                     placeholder="Email"/>
             </div>
-            <div className="flex items-center border-b border-gray-500 py-2 mb-5">
+            <div className="flex items-center py-2 mb-5">
                 <input 
-                    className="appearance-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" 
+                    className="appearance-none border-b border-gray-500 w-full text-gray-500 mr-3 py-3 px-2 leading-tight focus:outline-none" 
                     type="password" 
                     placeholder="Password"/>
             </div>

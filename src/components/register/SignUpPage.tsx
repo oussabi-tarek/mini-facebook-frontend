@@ -5,14 +5,14 @@ import SignUpForm from "./SignUpForm";
 
 export default function SignUpPage(){
     return(
-        <div className="grid grid-cols-2 h-screen">
-            <div className="flex flex-col justify-center items-center h-screen">
+        <div className="grid grid-cols-2">
+            <div className="flex flex-col justify-center items-center">
                 <HeaderForm 
                     title={"SIGN UP"}/>
                 <SignUpForm />
                 <Button 
                     text={"Do you have already an account?"}
-                    textButton={"Login"}
+                    textButton={"LOGIN"}
                     link={"#"}/>
             </div>
             <RighSideLoginRegister paragraph={"Please create your account"}/>

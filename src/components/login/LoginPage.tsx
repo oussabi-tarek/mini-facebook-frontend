@@ -9,7 +9,7 @@ export default function LoginPage(){
             <div className="flex flex-col justify-center items-center h-screen">
                 <HeaderForm title={"LOGIN"}/>
                 <LoginForm />
-                <Button text={"Create an account"} textButton={"Sign up"} link={"#"}/>
+                <Button text={"Create an account"} textButton={"SIGN UP"} link={"#"}/>
             </div>
             <RighSideLoginRegister 
                 paragraph={"Please log in to access your account"}/>
