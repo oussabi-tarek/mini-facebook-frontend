@@ -1,21 +1,22 @@
 import './App.css';
-
-import LoginForm from './components/login/LoginForm';
-import LoginPage from './components/login/LoginPage';
 import SignUpPage from './components/register/SignUpPage';
 import NavBar from "./components/navBar/Navbar";
-import AddPost from "./components/homePage/AddPost";
-import Card from "./components/homePage/Card";
+import { PostListContainer } from './container/PostListContainer';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AddPostContainer } from './container/AddPostContainer';
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
     <>
-     <SignUpPage />
+      <QueryClientProvider client={queryClient}>
      <NavBar/>
      <div className='flex flex-col items-center pl-20 pr-20 dark:bg-black'>
-     <AddPost/>
-     <Card/>
+     <AddPostContainer/>
+     <PostListContainer/>
      </div>
+     </QueryClientProvider>
     </> 
   );  
 }
