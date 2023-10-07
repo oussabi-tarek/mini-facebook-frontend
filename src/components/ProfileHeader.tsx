@@ -1,4 +1,5 @@
-import AddPost from "./AddPost";
+import AddPost from "./homePage/AddPost";
+
 
 const ProfileHeader = () => {
 
