@@ -5,8 +5,7 @@ import Card from "./homePage/Card";
 export default function Home(){
     return(
         <>
-            <AddPost/>
-            <Card/>
+           
         </>
     )
 }

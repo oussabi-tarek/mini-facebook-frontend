@@ -1,8 +1,7 @@
-import AddPost from "./homePage/AddPost";
-
+import AddPost from "./addPost/AddPost"
 
 const ProfileHeader = () => {
-
+    
     return(
         <>
             <div className="flex flex-col m-auto">
@@ -10,7 +9,7 @@ const ProfileHeader = () => {
                     <p>What's on your mind today barry ?</p>
                 </div>
                 <div>
-                    <AddPost/>
+                 
                 </div>
 
             </div>
