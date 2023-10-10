@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { colors } from "../colors";
 import { CardContainerProps } from "../types/post/Types";
-import Card from "../components/post/Card";
 import useDeleteLike from "../hooks/like/useDeleteLike";
 import useDeleteUnLike from "../hooks/unLike/useDeleteUnLike";
 import useInsertLike from "../hooks/like/useInsertLike";
 import useInsertUnLike from "../hooks/unLike/useInsertUnLike";
 import useInsertComment from "../hooks/comment/useInsertComment";
+import Card from "../components/post/Card";
 
 
 export const CardContainer=(props:CardContainerProps)=>{
