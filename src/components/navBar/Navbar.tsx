@@ -4,7 +4,11 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import MINIFACEBOOK from "../../images/minifacebookrm.png"
 import PROFILE from "../../images/profile.png"
 import Search  from './Search'
+
+import { NavBarProps } from '../../types/Types'
+
 import authContext, { AuthContext } from '../../context/AuthContextProvider'
+
 
 
 
@@ -12,8 +16,11 @@ function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function NavBar() {
+
+export default function NavBar(props:NavBarProps) {
+
   const authenticationContext = useContext(authContext);
+
   let [darkMode, setDarkMode] = useState(false);
   useEffect(()=>{
      let mode=!darkMode?'dark':'light';
@@ -61,7 +68,7 @@ export default function NavBar() {
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                <div>
-                <Search />
+                <Search search={props.search} changeSearch={props.changeSearch} />
                </div>
                 
 
