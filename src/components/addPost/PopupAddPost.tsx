@@ -1,7 +1,7 @@
 import FormHeader from "./FormHeader";
 import { PopupProps } from "../../types/Types";
 
-export default function Popup(props:PopupProps) {
+export default function PopupAddPost(props:PopupProps) {
  return (
     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 
     flex justify-center items-center">
@@ -10,11 +10,11 @@ export default function Popup(props:PopupProps) {
             <form className="flex flex-col">            
             <div>
             <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
-            <textarea id="message" rows={9} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
+            <textarea id="message" value={props.content} onChange={props.changeContent} rows={9} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
             </div>
             <div className="mb-3">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="user_avatar">Upload image</label>
-            <input className="block w-full bg-black text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file" />
+            <input onChange={props.changeImage} className="block w-full bg-black text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file" />
             <div className="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help"></div>
             </div>
             <div className="grid justify-items-end">
