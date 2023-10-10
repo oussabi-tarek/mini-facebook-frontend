@@ -20,7 +20,7 @@ export default function Card(props:CardProps){
              <h5 className='mt-2 ml-2 dark:text-white'>{props.post.user.firstName} {props.post.user.lastName}</h5>
             </div>   
             <div className='flex flex-col items-left mt-1 ml-10 mr-10'>
-                <p className='mb-3 dark:text-white'>{props.post.content}</p>
+                <p className='mb-3 dark:text-white'>{props.formatContent(props.post.content)}</p>
                 <img  src={ props.post.images[0]!==undefined ?  props.getImageFromBytes(props.post.images[0].imageBytes):POST} className='w-83 h-83'/>
             </div>
             <div className='flex flex-row  justify-between  ml-10 mt-3 mb-2 w-full'>

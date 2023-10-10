@@ -3,19 +3,25 @@ import { useAxios } from "../axios/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { ENDPOINTS } from "../endpoint";
 import { Post } from "../../types/post/Types";
+import { useEffect } from "react";
 
 const fetchPostsQueryFn = async (
     axios: AxiosInstance,
+    content: string
   ): Promise<Post[]> =>
-  axios.get( `${ENDPOINTS.POSTS}`).then((response) => response.data);
+  axios.get( `${ENDPOINTS.POSTS}?content=${content}`).then((response) => response.data);
 
-const useGetPosts = () => {
+const useGetPosts = (content:string) => {
     const { axios } = useAxios();
-    const { status, data, error } = useQuery({
+    const { status, data, error ,refetch} = useQuery({
       queryKey: ["fetchAllPosts"],
-      queryFn:() => fetchPostsQueryFn(axios),
+      queryFn:() => fetchPostsQueryFn(axios, content),
       refetchOnWindowFocus: false
     });
+ 
+  useEffect(() => {
+    refetch();
+  },[content])
 
     return {
         status,

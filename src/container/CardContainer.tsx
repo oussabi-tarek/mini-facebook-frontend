@@ -38,6 +38,48 @@ export const CardContainer=(props:CardContainerProps)=>{
     
     },[])
 
+    const formatContent = (content:string) => {
+        const regex = /#(\w+)/g;
+        const regex2 = /(https?:\/\/[^\s]+)/g;
+        const tagparts = content.match(regex); // Use match to find all hashtags
+        const linkparts = content.match(regex2); // Use match to find all links
+        console.log("linkparts:"+linkparts);
+
+        if (!tagparts) {
+          return <span>{content}</span>; // Return the content as-is if there are no hashtags
+        }
+      
+        const formattedContent = content.split(regex).map((part, index) => {
+            part="#"+part;  
+          console.log("part:"+part);  
+          if (tagparts!==null && tagparts.includes(part)) {
+            // If the part is a hashtag, apply a different style
+            return (
+              <span key={index} className="text-yellow-500">
+                {part}
+              </span>
+            );
+          } else {
+            part=part.substring(1);
+            if(part.match(regex2)){
+                console.log("part.match(regex2):"+part.match(regex2));
+                return (
+                    <a key={index} href={part}  className="text-blue-500 border-b-2 border-indigo-500">
+                      {part}
+                    </a>
+                  );
+              }
+            else
+               return <span key={index}>{part}</span>;
+          }
+          
+
+        });
+        
+      
+        return formattedContent;
+      };
+      
 
     const changeVisibility=()=>{
         isVisible ? setIsVisible(false) : setIsVisible(true);
@@ -132,6 +174,7 @@ export const CardContainer=(props:CardContainerProps)=>{
 
     return(
       <Card isVisible={isVisible} likeColor={likeColor} unlikeColor={unlikeColor} 
+         formatContent={formatContent}
        changeLikeColor={changelikeColor} changeUnlikeColor={changeUnlikeColor} comment={comment}
        changeComment={chnageComment} addComment={addComment} getImageFromBytes={getImageFromBytes}
        changeVisibility={changeVisibility}  post={props.post} getElapsedTime={getElapsedTime}/>

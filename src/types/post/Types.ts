@@ -29,6 +29,7 @@ export type CardProps={
      comment: string;
      changeComment: (event:any) => void;
      getImageFromBytes: (image: string) => string;
+     formatContent: (content: string) => JSX.Element[]|JSX.Element;
 }
 export type CardContainerProps={
   post: Post;
