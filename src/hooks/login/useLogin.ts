@@ -1,6 +1,7 @@
 import { AxiosInstance } from "axios";
 import { ENDPOINTS } from "../endpoint";
 import { AuthContext } from "../../context/AuthContextProvider";
+import axios from "axios"
 
 const login = async (
     axios: AxiosInstance,
@@ -19,9 +20,11 @@ const login = async (
     return response;
 }
 
-export const sendLogin = (axios:AxiosInstance, authenticationContext: AuthContext, formData:{email: string, password:string}) => {
-    
-    login(axios, formData)
+export const sendLogin = ( authenticationContext: AuthContext, formData:{email: string, password:string}) => {
+    const axiosInstance = axios.create({
+        baseURL: process.env.REACT_APP_VITE_API_BASE_URL,
+      });
+    login(axiosInstance, formData)
     .then(response => {
         console.log(response.data);
         console.log(response.data);

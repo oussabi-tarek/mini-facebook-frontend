@@ -1,14 +1,17 @@
 import { useForm } from "react-hook-form";
 import ButtonSubmitForm from "../utils/ButtonSubmitForm";
 import { useNavigate } from "react-router-dom";
-import { useAxios } from "../../hooks/axios/useAxios";
+
 import { ENDPOINTS } from "../../hooks/endpoint";
 import { RegisterInputs } from "../../types/Types";
+import axios from "axios";
 
 export default function SignUpForm(){
     const {register, handleSubmit} = useForm<RegisterInputs>();
     const navigate = useNavigate();
-    const {axios} = useAxios();
+    const axiosInstance = axios.create({
+        baseURL: process.env.REACT_APP_VITE_API_BASE_URL,
+      });
     const onSubmit = async (data: RegisterInputs) => {
         const requestBody = {
             firstName: data.firstName,
@@ -21,7 +24,7 @@ export default function SignUpForm(){
                 'Content-Type': 'application/json'
             }
         }
-        const response = await axios.post(ENDPOINTS.REGISTER,requestBody,config);
+        const response = await axiosInstance.post(ENDPOINTS.REGISTER,requestBody,config);
         if(response.status === 200){
             console.log(response.data);
             navigate("/login");

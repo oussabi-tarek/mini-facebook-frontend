@@ -9,11 +9,9 @@ import {sendLogin} from "../../hooks/login/useLogin";
 export default function LoginForm(){
     const {register, handleSubmit} = useForm<LoginInputs>();
     const authenticationContext = useContext(authContext);
-    const {axios} = useAxios();
     
     const onSubmit = async (data: LoginInputs) => {
         sendLogin(
-            axios,
             authenticationContext,
             {email:data.email, password:data.password});
     }
