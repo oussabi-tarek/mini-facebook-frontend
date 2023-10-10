@@ -52,6 +52,7 @@ export type Image={
 export type CommentSectionProps={
    comment:Comment;
 }
+
 export type SearchProps={
     search:string;
     changeSearch:(value:string)=>void;
@@ -60,3 +61,26 @@ export type NavBarProps={
     search:string;
     changeSearch:(value:string)=>void;
 }
+
+export type LoginInputs = {
+    email: string,
+    password: string
+}
+export type RegisterInputs = {
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+}
+export type AuthProviderProps = {
+    children : React.ReactElement;
+}
+  
+export type UserData = {
+    authToken: string;
+    refreshToken: string;
+    userId: string;
+    name: string;
+    email: string;
+};
+

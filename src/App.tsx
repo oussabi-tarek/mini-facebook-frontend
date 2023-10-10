@@ -1,19 +1,30 @@
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css';
-import SignUpPage from './components/register/SignUpPage';
-import NavBar from "./components/navBar/Navbar";
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { PostListContainer } from './container/PostListContainer';
 import { AddPostContainer } from './container/AddPostContainer';
+import NavBar from './components/navBar/Navbar';
+import authContext, { AuthContextProvider } from './context/AuthContextProvider';
+import Home from './components/Home';
+import LoginPage from './components/login/LoginPage';
+import SignUpPage from './components/register/SignUpPage';
 import { HomeContainer } from './container/HomeContainer';
-
-const queryClient = new QueryClient();
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 function App() {
   return (
-    <>
-      <QueryClientProvider client={queryClient}>
-     <HomeContainer/>
-     </QueryClientProvider>
-    </> 
+    <BrowserRouter>
+      
+      <AuthContextProvider>
+         <QueryClientProvider client={queryClient}>
+        <Routes>
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/signup' element={<SignUpPage />} />
+          <Route path='/' element={<HomeContainer />} />
+        </Routes>
+         </QueryClientProvider>
+      </AuthContextProvider>
+         
+    </BrowserRouter> 
   );  
 }
 
