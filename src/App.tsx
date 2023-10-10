@@ -1,21 +1,24 @@
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css';
 import AddPost from './components/homePage/AddPost';
 import Card from './components/homePage/Card';
 import NavBar from './components/navBar/Navbar';
-import AuthProvider from './components/context/AuthContext';
+import authContext, { AuthContextProvider } from './components/context/AuthContextProvider';
+import Home from './components/Home';
+import LoginPage from './components/login/LoginPage';
+import SignUpPage from './components/register/SignUpPage';
 
 
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <NavBar/>
-        <div className='flex flex-col items-center pl-20 pr-20'>
-        <AddPost/>
-        <Card/>
-        </div>
-      </AuthProvider>
+      <AuthContextProvider>
+        <Routes>
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/signup' element={<SignUpPage />} />
+          <Route path='/' element={<Home />} />
+        </Routes>
+      </AuthContextProvider>
     </BrowserRouter> 
   );  
 }

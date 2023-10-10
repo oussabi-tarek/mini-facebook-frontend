@@ -4,7 +4,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import MINIFACEBOOK from "../../images/minifacebookrm.png"
 import PROFILE from "../../images/profile.png"
 import Search  from './Search'
-import { AuthContext } from '../context/AuthContext'
+import authContext, { AuthContext } from '../context/AuthContextProvider'
 
 
 
@@ -13,7 +13,7 @@ function classNames(...classes:any) {
 }
 
 export default function NavBar() {
-  const {access_token, refresh_token, user} = useContext(AuthContext);
+  const authenticationContext = useContext(authContext);
   let [darkMode, setDarkMode] = useState(false);
   useEffect(()=>{
      let mode=!darkMode?'dark':'light';
@@ -100,12 +100,12 @@ export default function NavBar() {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="#"
+                          <button
+                            onClick={authenticationContext.globalLogOutDispatch}
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Sign out
-                          </a>
+                          </button>
                         )}
                       </Menu.Item>
                     </Menu.Items>

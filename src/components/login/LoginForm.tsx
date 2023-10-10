@@ -1,13 +1,18 @@
 import { useForm } from "react-hook-form";
 import ButtonSubmitForm from "../utils/ButtonSubmitForm";
 import axios from "axios";
+import {useNavigate, Navigate} from "react-router-dom";
+import { useContext } from "react";
+import authContext, { AuthContext } from "../context/AuthContextProvider";
 
 type LoginInputs = {
     email: string,
     password: string
 }
+const API_URL="http://localhost:8081/"
 export default function LoginForm(){
     const {register, handleSubmit} = useForm<LoginInputs>();
+    const authenticationContext = useContext(authContext);
     const onSubmit = async (data: LoginInputs) => {
         const formData = new URLSearchParams();
         formData.append('email', data.email);
@@ -17,11 +22,17 @@ export default function LoginForm(){
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }
-        const response = await axios.post("http://localhost:8081/auth/login",formData.toString(),config);
-        console.log(response.data);
-        localStorage.setItem('access_token',response.data.auth.access_token);
-        localStorage.setItem('logged_user', JSON.stringify(response.data.user));
-        localStorage.setItem('refresh_token',response.data.auth.refresh_token);
+        const response = await axios.post(API_URL+"auth/login",formData.toString(),config);
+        if(response.status === 200){
+            console.log(response.data);
+            const authToken = response.data.auth.access_token;
+            const refreshToken = response.data.auth.refresh_token;
+            const userId = response.data.user.id;
+            const name = response.data.user.lastName +" "+ response.data.user.lastName;
+            const email = response.data.user.email;
+            const isAuthenticated = true;
+            authenticationContext.globalLogInDispatch({authToken,refreshToken,userId,name,email});
+        }
     }
     return(
         <form
