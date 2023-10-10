@@ -9,8 +9,8 @@ import authReducer, { AuthState, defaultAuthState } from "./authReducer";
 import { Navigate, useNavigate } from "react-router-dom";
 import { AuthActionEnum } from "./authActions";
 import axios from "axios";
-import LoginPage from "../login/LoginPage";
-import SignUpPage from "../register/SignUpPage";
+import LoginPage from "../components/login/LoginPage";
+import SignUpPage from "../components/register/SignUpPage";
 
 type AuthProviderProps = {
   children : React.ReactElement;
@@ -73,7 +73,7 @@ export const AuthContextProvider = (props: AuthProviderProps)=>{
          };
          validateToken();
         }
-      }, [authState.authToken]);
+      }, []);
     const globalLogInDispatch = useCallback(
       (props: UserData) => {
         const { authToken, refreshToken, email, name, userId } = props;
@@ -105,7 +105,7 @@ export const AuthContextProvider = (props: AuthProviderProps)=>{
   
   return (
     <authContext.Provider value={context}>
-      {isAuthenticated?children:(path=="/signup"?<SignUpPage />:<LoginPage />)}
+      {isAuthenticated?children:(path==="/signup"?<SignUpPage />:<LoginPage />)}
     </authContext.Provider>)
 }
 export default authContext;

@@ -4,7 +4,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import MINIFACEBOOK from "../../images/minifacebookrm.png"
 import PROFILE from "../../images/profile.png"
 import Search  from './Search'
-import authContext, { AuthContext } from '../context/AuthContextProvider'
+import authContext, { AuthContext } from '../../context/AuthContextProvider'
 
 
 

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import ButtonSubmitForm from "../utils/ButtonSubmitForm";
 import { useContext } from "react";
-import authContext from "../context/AuthContextProvider";
+import authContext from "../../context/AuthContextProvider";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 

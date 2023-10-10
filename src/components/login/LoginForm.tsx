@@ -3,7 +3,7 @@ import ButtonSubmitForm from "../utils/ButtonSubmitForm";
 import axios from "axios";
 import {useNavigate, Navigate} from "react-router-dom";
 import { useContext } from "react";
-import authContext, { AuthContext } from "../context/AuthContextProvider";
+import authContext, { AuthContext } from "../../context/AuthContextProvider";
 
 type LoginInputs = {
     email: string,

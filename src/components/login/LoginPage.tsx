@@ -3,7 +3,7 @@ import Button from "../utils/Button";
 import HeaderForm from "../utils/HeaderForm";
 import RighSideLoginRegister from "../utils/RightSideLoginRegister";
 import LoginForm from "./LoginForm";
-import { AuthContext } from "../context/AuthContextProvider";
+import { AuthContext } from "../../context/AuthContextProvider";
 import {useNavigate, Navigate} from "react-router-dom";
 
 export default function LoginPage(){

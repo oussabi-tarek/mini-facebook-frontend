@@ -3,7 +3,7 @@ import './App.css';
 import AddPost from './components/homePage/AddPost';
 import Card from './components/homePage/Card';
 import NavBar from './components/navBar/Navbar';
-import authContext, { AuthContextProvider } from './components/context/AuthContextProvider';
+import authContext, { AuthContextProvider } from './context/AuthContextProvider';
 import Home from './components/Home';
 import LoginPage from './components/login/LoginPage';
 import SignUpPage from './components/register/SignUpPage';
