@@ -10,6 +10,7 @@ import SignUpPage from './components/register/SignUpPage';
 import { HomeContainer } from './container/HomeContainer';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+const queryClient = new QueryClient();
 function App() {
   return (
     <BrowserRouter>
