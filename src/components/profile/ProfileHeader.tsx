@@ -1,4 +1,3 @@
-import AddPost from "./addPost/AddPost"
 
 const ProfileHeader = () => {
     

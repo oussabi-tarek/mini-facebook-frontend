@@ -1,10 +1,10 @@
-import PROFILE from '../images/profile.png';
-import POST from '../images/post.jpg';
-import LIKE from '../images/like.png';
-import NOTLIKE from '../images/notlike.png';
-import COMMENT from '../images/comment.png';
-import EDIT from "../images/editMe.png";
-import ICONDELETE from "../images/DeleteIcon.png";
+import PROFILE from '../../images/profile.png';
+import POST from '../../images/post.jpg';
+import LIKE from '../../images/like.png';
+import NOTLIKE from '../../images/notlike.png';
+import COMMENT from '../../images/comment.png';
+import EDIT from "../../images/editMe.png";
+import ICONDELETE from "../../images/DeleteIcon.png";
 
 export default function PostProfile(){
     return(

@@ -1,3 +1,4 @@
+import { Post } from "./post/Types"
 
 export type AddPostProps={
     addPostClick:()=>void
@@ -21,6 +22,9 @@ export type User={
     email:string;
     password:string;
     createdAt:string;
+    location: string;
+    biography: string;
+    userPosts: Post[];
 }
 export type Like={
     id:string;
