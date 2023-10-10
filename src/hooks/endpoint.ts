@@ -4,4 +4,7 @@ export const ENDPOINTS = {
     USERS:"/users",
     LIKES:"/likes",
     UNLIKES:"/unlikes",
+    LOGIN: "/auth/login",
+    REGISTER: "/auth/register",
+    VALIDATE_TOKEN: "/auth/validateToken"
   };
