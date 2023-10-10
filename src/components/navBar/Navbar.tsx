@@ -1,9 +1,10 @@
-import {Fragment, useEffect, useState} from 'react'
+import {Fragment, useContext, useEffect, useState} from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import MINIFACEBOOK from "../../images/minifacebookrm.png"
 import PROFILE from "../../images/profile.png"
 import Search  from './Search'
+import authContext, { AuthContext } from '../../context/AuthContextProvider'
 
 
 
@@ -12,6 +13,7 @@ function classNames(...classes:any) {
 }
 
 export default function NavBar() {
+  const authenticationContext = useContext(authContext);
   let [darkMode, setDarkMode] = useState(false);
   useEffect(()=>{
      let mode=!darkMode?'dark':'light';
@@ -98,12 +100,12 @@ export default function NavBar() {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="#"
+                          <button
+                            onClick={authenticationContext.globalLogOutDispatch}
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Sign out
-                          </a>
+                          </button>
                         )}
                       </Menu.Item>
                     </Menu.Items>
