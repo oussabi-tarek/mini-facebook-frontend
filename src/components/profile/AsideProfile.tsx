@@ -5,27 +5,29 @@ import UpdateIcon from '../../images/updateIcon.png'
 import { User } from '../../types/Types';
 import React, { useEffect, useState } from 'react';
 import { Post } from '../../types/post/Types';
+import PopupEditProfile from './PopupEditProfile';
 
 
-const AsideProfile = (user:User) => {
+const AsideProfile = ({user, updateUserClick} : {user:User, updateUserClick: any}) => {
+
     const [totalPost, setTotalPost] = useState<number>(0);
     const [likedPercent, setLikedPercent] = useState<number>(0);
     const [unlikedPercent, setUnlikedPercent] = useState<number>(0);
+    const [showPopup, setShowPopup] = useState<boolean>(false);
+
+    const handlePopup = () => setShowPopup(!showPopup);
 
     useEffect(() => {
         const userPosts : Post[] = user.userPosts;
 
         const numTotalPosts : number = userPosts ? userPosts.length : 0 ;
-        
         const numLikedPosts = userPosts.filter((post) => post.likes.length > 0).length;
         const numUnlikedPosts = userPosts.filter((post) => post.unLikes.length > 0).length;
         
-
         setTotalPost(numTotalPosts);
         setLikedPercent((numLikedPosts / numTotalPosts) *100);
         setUnlikedPercent((numUnlikedPosts / numLikedPosts) *100);
     }, [])
-
 
     return(
         <>
@@ -64,7 +66,7 @@ const AsideProfile = (user:User) => {
                 <div>
                     <div className='flex justify-center'>
                         <h4 className='text-xl font-bold text-center p-6'>Your Information</h4>
-                        <button>
+                        <button onClick={handlePopup}>
                             <img src={UpdateIcon} alt="update" className="w-6 h-6"/>
                         </button>
                     </div>
@@ -76,6 +78,7 @@ const AsideProfile = (user:User) => {
                                 name="firstName"
                                 type="text"
                                 value={user.firstName}
+                                readOnly
                                 className="block  w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                             />     
                         </div>
@@ -85,6 +88,7 @@ const AsideProfile = (user:User) => {
                                 name="firstName"
                                 type="text"
                                 value={user.lastName}
+                                readOnly
                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                             />  
                         </div>      
@@ -96,6 +100,7 @@ const AsideProfile = (user:User) => {
                             name="email"
                             type="text"
                             value={user.email}
+                            readOnly
                             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                         />              
                     </div>
@@ -104,16 +109,19 @@ const AsideProfile = (user:User) => {
                              id="location"
                             name="location"
                             type="text"
+                            readOnly
                             value={user.location}
                             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                         />              
                     </div>    
                     </div>
-
                 </div>
 
                 </div>
             </div>
+            {showPopup && (
+                <PopupEditProfile handlePopup={handlePopup} updateUser={updateUserClick} user={user}/>
+            )}
         </>
     )
 

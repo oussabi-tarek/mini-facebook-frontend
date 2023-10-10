@@ -21,7 +21,7 @@ const useGetUser = (userId : string) => {
     })
     return{
         status,
-        user : data ? data : [],
+        userData : data ? data : [],
         error
     }
 }
