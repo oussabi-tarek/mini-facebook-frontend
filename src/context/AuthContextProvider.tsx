@@ -13,6 +13,7 @@ import SignUpPage from "../components/register/SignUpPage";
 import { ENDPOINTS } from "../hooks/endpoint";
 import { useAxios } from "../hooks/axios/useAxios";
 import { AuthProviderProps, UserData } from "../types/Types";
+import axios from "axios";
 
 
 
@@ -34,7 +35,9 @@ export const AuthContextProvider = (props: AuthProviderProps)=>{
     const navigate = useNavigate();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const path = window.location.pathname;
-    const {axios} = useAxios();
+    const axiosInstance = axios.create({
+      baseURL: process.env.REACT_APP_VITE_API_BASE_URL,
+    });
     console.log("PATH "+path);
     useEffect(() => {
         const user = localStorage.getItem("user");
@@ -49,7 +52,7 @@ export const AuthContextProvider = (props: AuthProviderProps)=>{
             }
           };
           const validateToken = async () => {
-            let response = await axios.post(ENDPOINTS.VALIDATE_TOKEN,formData.toString(),config);
+            let response = await axiosInstance.post(ENDPOINTS.VALIDATE_TOKEN,formData.toString(),config);
             console.log(response.data);
             if(response.status === 200){
               console.log("is active : " + response.data.active);
