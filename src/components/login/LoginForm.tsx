@@ -1,19 +1,24 @@
 import { useForm } from "react-hook-form";
 import ButtonSubmitForm from "../utils/ButtonSubmitForm";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import authContext, { AuthContext } from "../../context/AuthContextProvider";
 import { useAxios } from "../../hooks/axios/useAxios";
 import { LoginInputs } from "../../types/Types";
 import {sendLogin} from "../../hooks/login/useLogin";
+import Spinner from "../spinner/Spinner";
 
 export default function LoginForm(){
     const {register, handleSubmit} = useForm<LoginInputs>();
     const authenticationContext = useContext(authContext);
     
     const onSubmit = async (data: LoginInputs) => {
-        sendLogin(
-            authenticationContext,
-            {email:data.email, password:data.password});
+        try{
+            await sendLogin(
+                authenticationContext,
+                {email:data.email, password:data.password});
+        }catch(error){
+            console.log(error);
+        }
     }
     return(
         <form

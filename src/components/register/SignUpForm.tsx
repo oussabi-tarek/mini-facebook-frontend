@@ -1,30 +1,44 @@
 import { useForm } from "react-hook-form";
 import ButtonSubmitForm from "../utils/ButtonSubmitForm";
 import { useNavigate } from "react-router-dom";
-
 import { ENDPOINTS } from "../../hooks/endpoint";
 import { RegisterInputs } from "../../types/Types";
 import axios from "axios";
+import {useState} from "react";
 
 export default function SignUpForm(){
     const {register, handleSubmit} = useForm<RegisterInputs>();
     const navigate = useNavigate();
+    const [profileImage, setProfileImage] = useState("");
     const axiosInstance = axios.create({
         baseURL: process.env.REACT_APP_VITE_API_BASE_URL,
       });
-    const onSubmit = async (data: RegisterInputs) => {
-        const requestBody = {
-            firstName: data.firstName,
-            lastName: data.lastName,
-            email: data.email,
-            password: data.password
+
+      const handleImageUpload = (event : React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if(file){
+            const reader = new FileReader();
+            reader.onload = () => {
+                if(reader.result) {
+                    setProfileImage(reader.result.toString());
+                }
+            };
+            reader.readAsDataURL(file);
         }
+      };
+    const onSubmit = async (data: RegisterInputs) => {
+        const form = new FormData();
+        form.append("firstName", data.firstName);
+        form.append("lastName", data.lastName);
+        form.append("email", data.email);
+        form.append("password", data.password);
+        form.append("image", data.image[0]);
         const config = {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'multipart/form-data'
             }
         }
-        const response = await axiosInstance.post(ENDPOINTS.REGISTER,requestBody,config);
+        const response = await axiosInstance.post(ENDPOINTS.REGISTER,form,config);
         if(response.status === 200){
             console.log(response.data);
             navigate("/login");
@@ -74,6 +88,30 @@ export default function SignUpForm(){
                     type="tel" 
                     placeholder="Number phone +212 666666666"/>
             </div>
+            <div className="flex flex-col md:flex-row mb-3">
+                <div className="mb-3 md:mr-3">
+                    <label htmlFor="profileImage" className="block text-gray-500 font-medium mb-1">
+                    Profile Image
+                    </label>
+                    <input
+                        type="file"
+                        id="profileImage"
+                        accept="image/*"
+                        className="p-2 w-full text-transparent"
+                        {...register("image")}
+                        onChange={handleImageUpload}
+                    />
+                </div>
+                {profileImage && (
+                    <div className="mb-3">
+                    <img
+                        src={profileImage}
+                        alt="Profile Preview"
+                        className="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 object-cover rounded-full"
+                    />
+                    </div>
+                )}
+                </div>
             <ButtonSubmitForm textButton={"SIGN UP"}/>
         </form>
     )
