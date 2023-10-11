@@ -74,7 +74,8 @@ export type RegisterInputs = {
     firstName: string,
     lastName: string,
     email: string,
-    password: string
+    password: string,
+    image: any
 }
 export type AuthProviderProps = {
     children : React.ReactElement;
