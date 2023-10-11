@@ -34,45 +34,45 @@ export default function SignUpForm(){
         <form
             onSubmit={handleSubmit(onSubmit)}
             className="w-full p-6 mb-5">
-            <div className="flex items-center py-2 mb-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                 <input
                     {...register("firstName")}
-                    className="appearance-none border-b border-gray-500 w-full text-gray-700 mr-3 py-3 px-2 leading-tight focus:outline-none"
+                    className="input-field rounded border border-gray-400"
                     type="text"
                     placeholder="First name"/>
                 <input
                     {...register("lastName")}
-                    className="appearance-none border-b border-gray-500 w-full text-gray-700 mr-3 py-3 px-2 leading-tight focus:outline-none"
+                    className="input-field rounded border border-gray-400"
                     type="text"
                     placeholder="Last name"/>
             </div>
-            <div className="flex items-center py-2 mb-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                 <input
-                    className="appearance-none border-b border-gray-500 w-full text-gray-700 mr-3 py-3 px-2 leading-tight focus:outline-none"
+                    className="input-field rounded border border-gray-400"
                     type="text"
                     placeholder="Username"/>
                 <input
                     {...register("email")}
-                    className="appearance-none border-b border-gray-500 w-full text-gray-700 mr-3 py-3 px-2 leading-tight focus:outline-none"
+                    className="input-field rounded border border-gray-400"
                     type="email"
                     placeholder="Email"/>
             </div>
-            <div className="flex items-center py-2 mb-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                 <input
                     {...register("password")}
-                    className="appearance-none border-b border-gray-500 w-full text-gray-700 mr-3 py-3 px-2 leading-tight focus:outline-none"
+                    className="input-field rounded border border-gray-400"
                     type="password"
                     placeholder="Password"/>
                 <input 
-                    className="appearance-none border-b border-gray-500 w-full text-gray-700 mr-3 py-3 px-2 leading-tight focus:outline-none"
+                    className="input-field rounded border border-gray-400"
                     type="password"
                     placeholder="confirm password"/>
             </div>
-            <div className="flex items-center py-2 mb-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                 <input 
-                    className="appearance-none border-b border-gray-500 text-gray-700 mr-3 py-3 px-2 leading-tight focus:outline-none" 
+                    className="input-field rounded border border-gray-400" 
                     type="tel" 
-                    placeholder="Number phone 0606..."/>
+                    placeholder="Number phone +212 666666666"/>
             </div>
             <ButtonSubmitForm textButton={"SIGN UP"}/>
         </form>

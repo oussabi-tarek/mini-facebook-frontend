@@ -5,8 +5,8 @@ import SignUpForm from "./SignUpForm";
 
 export default function SignUpPage(){
     return(
-        <div className="grid grid-cols-2">
-            <div className="flex flex-col justify-center items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 h-screen">
+            <div className="flex flex-col justify-center items-center h-screen">
                 <HeaderForm 
                     title={"SIGN UP"}/>
                 <SignUpForm />
@@ -15,7 +15,9 @@ export default function SignUpPage(){
                     textButton={"LOGIN"}
                     link={"login"}/>
             </div>
-            <RighSideLoginRegister paragraph={"Please create your account"}/>
+            <div className="md:block hidden">
+                <RighSideLoginRegister paragraph={"Please create your account"}/>
+            </div>
         </div>
     )
 }
