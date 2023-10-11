@@ -1,8 +1,8 @@
 import PROFILE from '../../images/profile.png';
 import POST from '../../images/post.jpg';
-import LIKE from '../../images/like.png';
-import NOTLIKE from '../../images/notlike.png';
-import COMMENT from '../../images/comment.png';
+// import LIKE from '../../images/like.png';
+// import NOTLIKE from '../../images/notlike.png';
+// import COMMENT from '../../images/comment.png';
 import EDIT from "../../images/editMe.png";
 import ICONDELETE from "../../images/DeleteIcon.png";
 
@@ -36,19 +36,19 @@ export default function PostProfile(){
                 <div className="flex flex-row">
                 <div className='flex flex-row'>
                    <button> 
-                    <img src={LIKE} className='w-9 h-9' />
+                    <img src={""} className='w-9 h-9' />
                    </button>
                    <p className='mt-3.5'>91</p>
                 </div>
                 <div className='flex flex-row mt-3.5'>
                    <button> 
-                    <img src={NOTLIKE} className='w-9 h-9' />
+                    <img src={""} className='w-9 h-9' />
                    </button>
                    <p className='mb-2'>10</p>
                 </div>
                 <div className='flex flex-row mt-1'>
                    <button> 
-                    <img src={COMMENT} className='w-8 h-8' />
+                    <img src={""} className='w-8 h-8' />
                    </button>
                    <p className='mt-3'>09</p>
                 </div>

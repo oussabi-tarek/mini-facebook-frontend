@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import AsideProfile from "../components/profile/AsideProfile";
+import authContext from "../context/AuthContextProvider";
 import useGetUser from "../hooks/user/useGetUser";
 import useUpdateUser from "../hooks/user/useUpdateUser";
 import { updateUserInput } from "../types/profile/Types";
@@ -7,9 +9,9 @@ import MainProfile from "./MainProfileContainer";
 
 
 function Profile(){
-    const userId : string = "1"
+    const user : any = useContext(authContext)?? "1";
 
-    const {status, userData, error} = useGetUser(userId);
+    const {status, userData, error} = useGetUser(user.authState.userId);
     const {updateUserMutation} = useUpdateUser();
 
  const updateUser = (userId: string, user: updateUserInput) => {
