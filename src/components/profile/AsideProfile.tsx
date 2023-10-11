@@ -18,9 +18,10 @@ const AsideProfile = ({user, updateUserClick} : {user:User, updateUserClick: any
     const handlePopup = () => setShowPopup(!showPopup);
 
     useEffect(() => {
-        const userPosts : Post[] = user.userPosts;
-
+        const userPosts : Post[] = user.userPosts ?? [];
+        console.log("userPost : ", userPosts);
         const numTotalPosts : number = userPosts ? userPosts.length : 0 ;
+        
         const numLikedPosts = userPosts.filter((post) => post.likes.length > 0).length;
         const numUnlikedPosts = userPosts.filter((post) => post.unLikes.length > 0).length;
         

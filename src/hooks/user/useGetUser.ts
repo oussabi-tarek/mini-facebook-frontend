@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 const fetchUserQueryFn = async (axios: AxiosInstance, userId : string) => {
     try{
          const response = await axios.get(`${ENDPOINTS.USERS}/${userId}`);
+         console.log("respojnse : ", response)
          return response.data;
     }catch(error : any) {console.log(error)}
 }

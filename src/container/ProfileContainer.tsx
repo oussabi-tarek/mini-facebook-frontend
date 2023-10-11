@@ -9,9 +9,11 @@ import MainProfile from "./MainProfileContainer";
 
 
 function Profile(){
-    const user : any = useContext(authContext)?? "1";
+    const user : any = useContext(authContext)?? "1"
+    console.log("userId : ", user.authState.userId);
 
     const {status, userData, error} = useGetUser(user.authState.userId);
+    console.log("status: ", status , " userData : " , userData)
     const {updateUserMutation} = useUpdateUser();
 
  const updateUser = (userId: string, user: updateUserInput) => {
