@@ -25,7 +25,7 @@ const updatePostFn = async (
     mutationFn:   (post: Post) =>
         updatePostFn(axios, post),
         onSuccess:async()=>{
-            queryClient.invalidateQueries(["fetchAllPosts"]);
+            queryClient.invalidateQueries(["fetchUserPosts"]);
         }
   });
   
