@@ -16,7 +16,7 @@ export default function PostProfile(){
                         src={PROFILE}
                         alt=""
                         /> 
-                    <h5 className='mt-2 ml-2'>Barry</h5>
+                    <h5 className='mt-2 ml-2'>{}</h5>
                 </div>
                 <div className='flex m-auto justify-between'>
                     <button className='mr-2' >
