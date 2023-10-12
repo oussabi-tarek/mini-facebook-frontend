@@ -109,7 +109,7 @@ export default function NavBar(props:NavBarProps) {
                         {({ active }) => (
                           <button
                             onClick={authenticationContext.globalLogOutDispatch}
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 text-left w-full')}
                           >
                             Sign out
                           </button>

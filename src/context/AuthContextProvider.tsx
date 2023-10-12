@@ -13,6 +13,7 @@ import SignUpPage from "../components/register/SignUpPage";
 import { ENDPOINTS } from "../hooks/endpoint";
 import { AuthProviderProps, UserData } from "../types/Types";
 import axios from "axios";
+import Spinner from "../components/spinner/Spinner";
 
 
 
@@ -33,6 +34,7 @@ export const AuthContextProvider = (props: AuthProviderProps)=>{
     const [authState, authDispatch] = useReducer(authReducer, defaultAuthState);
     const navigate = useNavigate();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const path = window.location.pathname;
     const axiosInstance = axios.create({
       baseURL: process.env.REACT_APP_VITE_API_BASE_URL,
@@ -65,8 +67,12 @@ export const AuthContextProvider = (props: AuthProviderProps)=>{
             else{
               navigate("/login");
             }
+            setIsLoading(false);
          };
          validateToken();
+        }
+        else{
+          setIsLoading(false);
         }
       }, [authState.authToken]);
 
@@ -98,7 +104,11 @@ export const AuthContextProvider = (props: AuthProviderProps)=>{
       globalLogInDispatch,
       globalLogOutDispatch
   };
-  
+  if(isLoading){
+    return(
+      <Spinner />
+    )
+  }
   return (
     <authContext.Provider value={context}>
       {isAuthenticated?children:(path==="/signup"?<SignUpPage />:<LoginPage />)}
