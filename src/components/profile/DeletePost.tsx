@@ -13,7 +13,7 @@ const PopupDeletePost = (props: PopupDeleteProps ) => {
     <div className="fixed inset-0 flex items-center justify-center z-50 mt-12 ">
       <div className="custom-popup bg-white rounded-xl shadow-lg p-3 ">
         <div className='relative'>
-             <div className="mb-6 child p-6">
+             <div className="mb-12 child p-12">
                 <div className="flex flex-col">
                     <div className="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                        <div>

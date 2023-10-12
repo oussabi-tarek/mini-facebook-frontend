@@ -30,9 +30,11 @@ export type CardProps={
      changeComment: (event:any) => void;
      getImageFromBytes: (image: string) => string;
      formatContent: (content: string) => JSX.Element[]|JSX.Element;
+     isProfile: boolean;
 }
 export type CardContainerProps={
   post: Post;
+isProfile: boolean;
 }
 export type AddCommentProps={
      addComment: () => void;

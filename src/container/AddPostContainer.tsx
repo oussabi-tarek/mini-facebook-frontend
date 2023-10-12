@@ -12,7 +12,7 @@ export const AddPostContainer = () => {
     const [image, setImage] = useState(null);
     const {insertPostMutation}=useInsertPost();
 
-    const userId = useContext(authContext).authState.userId ??  "651986c46a089e4b7139f172";
+    const userId = useContext(authContext).authState.userId ??  "";
 
     
     const addPostClick = () => {

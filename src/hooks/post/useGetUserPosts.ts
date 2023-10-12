@@ -15,10 +15,10 @@ const useGetUserPosts = (userId:string) => {
     const { status, data} = useQuery({
       queryKey: ["fetchUserPosts"],
       queryFn:() => fetchUserPostsQueryFn(axios, userId),
-      refetchOnWindowFocus: false
+      refetchInterval:5000
     });
     return {
-        status,
+        statusPost: status,
         posts : data ? data : [],
       };
 

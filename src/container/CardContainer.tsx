@@ -180,6 +180,6 @@ export const CardContainer=(props:CardContainerProps)=>{
          formatContent={formatContent}
        changeLikeColor={changelikeColor} changeUnlikeColor={changeUnlikeColor} comment={comment}
        changeComment={chnageComment} addComment={addComment} getImageFromBytes={getImageFromBytes}
-       changeVisibility={changeVisibility}  post={props.post} getElapsedTime={getElapsedTime}/>
+       changeVisibility={changeVisibility}  post={props.post} getElapsedTime={getElapsedTime} isProfile={props.isProfile}/>
     )
 }

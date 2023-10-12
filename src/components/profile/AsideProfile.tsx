@@ -6,9 +6,10 @@ import { User } from '../../types/Types';
 import React, { useEffect, useState } from 'react';
 import { Post } from '../../types/post/Types';
 import PopupEditProfile from './PopupEditProfile';
+import extractYearMonthDayFromDate from '../utils/GetYearFromDate';
 
 
-const AsideProfile = ({user, updateUserClick} : {user:User, updateUserClick: any}) => {
+const AsideProfile = ({user, updateUserClick, posts} : {user:User, updateUserClick: any, posts:any}) => {
 
     const [totalPost, setTotalPost] = useState<number>(0);
     const [likedPercent, setLikedPercent] = useState<number>(0);
@@ -18,7 +19,7 @@ const AsideProfile = ({user, updateUserClick} : {user:User, updateUserClick: any
     const handlePopup = () => setShowPopup(!showPopup);
 
     useEffect(() => {
-        const userPosts : Post[] = user.userPosts ?? [];
+        const userPosts : Post[] = posts??[];
         console.log("userPost : ", userPosts);
         const numTotalPosts : number = userPosts ? userPosts.length : 0 ;
         
@@ -28,16 +29,18 @@ const AsideProfile = ({user, updateUserClick} : {user:User, updateUserClick: any
         setTotalPost(numTotalPosts);
         setLikedPercent((numLikedPosts / numTotalPosts) *100);
         setUnlikedPercent((numUnlikedPosts / numLikedPosts) *100);
-    }, [])
+    }, [posts])
+    
+    const userCreation = extractYearMonthDayFromDate(user.createdAt);
 
     return(
         <>
-            <div className="w-full flex flex-col border-1">
+            <div className="w-full flex flex-col border-2">
                 
                 <div className='flex flex-col p-6'>
                     <span className='flex justify-center mb-2 text-xl font-bold border-2 border-w rounded-full'>About Me</span>
-                    <div className='flex mb-3'><img src={BIO} className="w-6 h-6 mr-3" alt="bio"/>{user.biography}</div>
-                    <div className='flex mb-3'><img src={SINCE} className="w-6 h-6 mr-3" alt="membership" />Member since {user.createdAt}</div>
+                    <div className='flex mb-3 text-sm'><img src={BIO} className="w-6 h-6 mr-3" alt="bio"/>{user.biography}</div>
+                    <div className='flex mb-3 '><img src={SINCE} className="w-6 h-6 mr-3" alt="membership" />Member since {userCreation?.month +" "+userCreation?.year}</div>
                 </div>
                 <div className='w-full bg-gray-200 p-6'>
                  <div className='flex flex-col'>
