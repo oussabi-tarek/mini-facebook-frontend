@@ -33,6 +33,8 @@ export default function SignUpForm(){
         form.append("email", data.email);
         form.append("password", data.password);
         form.append("image", data.image[0]);
+        form.append("localisation", data.localisation);
+        form.append("bibliographie", data.bibliographie);
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -87,11 +89,16 @@ export default function SignUpForm(){
                     className="input-field rounded border border-gray-400" 
                     type="tel" 
                     placeholder="Number phone +212 666666666"/>
+                <input
+                    {...register("localisation")}
+                    className="input-field rounded border border-gray-400" 
+                    type="text" 
+                    placeholder="Localisation"/>
             </div>
-            <div className="flex flex-col md:flex-row mb-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                 <div className="mb-3 md:mr-3">
                     <label htmlFor="profileImage" className="block text-gray-500 font-medium mb-1">
-                    Profile Image
+                        Profile Image
                     </label>
                     <input
                         type="file"
@@ -101,17 +108,19 @@ export default function SignUpForm(){
                         {...register("image")}
                         onChange={handleImageUpload}
                     />
+                    {profileImage && <div className="mb-3">
+                        <img
+                            src={profileImage}
+                            alt="Image Profile"
+                            className="w-16 h-16 border border-gray-500 md:w-24 md:h-24 lg:w-32 lg:h-32 object-cover rounded-full"
+                        />
+                    </div>}
                 </div>
-                {profileImage && (
-                    <div className="mb-3">
-                    <img
-                        src={profileImage}
-                        alt="Profile Preview"
-                        className="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 object-cover rounded-full"
-                    />
-                    </div>
-                )}
-                </div>
+                <textarea
+                    {...register("bibliographie")}
+                    className="input-field rounded border border-gray-400"  
+                    placeholder="Bibliographie .."/>
+            </div>
             <ButtonSubmitForm textButton={"SIGN UP"}/>
         </form>
     )

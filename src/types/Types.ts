@@ -74,6 +74,8 @@ export type RegisterInputs = {
     lastName: string,
     email: string,
     password: string,
+    localisation: string,
+    bibliographie: string,
     image: any
 }
 export type AuthProviderProps = {
