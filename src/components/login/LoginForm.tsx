@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
 import ButtonSubmitForm from "../utils/ButtonSubmitForm";
 import { useContext } from "react";
-import authContext, { AuthContext } from "../../context/AuthContextProvider";
-import { useAxios } from "../../hooks/axios/useAxios";
+import authContext from "../../context/AuthContextProvider";
 import { LoginInputs } from "../../types/Types";
 import {sendLogin} from "../../hooks/login/useLogin";
 
@@ -13,7 +12,8 @@ export default function LoginForm(){
     const onSubmit = async (data: LoginInputs) => {
         sendLogin(
             authenticationContext,
-            {email:data.email, password:data.password});
+            {email:data.email, password:data.password}
+            );
     }
     return(
         <form

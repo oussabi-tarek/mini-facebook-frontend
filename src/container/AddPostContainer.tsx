@@ -1,41 +1,40 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AddPost from "../components/addPost/AddPost";
 import PopupAddPost from "../components/addPost/PopupAddPost";
 import useInsertPost from "../hooks/post/useInsertPost";
-import { mapImage, mapTags } from "../mappers/mappers";
-import { getAllJSDocTagsOfKind } from "typescript";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { AddPostForm } from "../types/Types";
+import authContext from "../context/AuthContextProvider";
+
+
 
 export const AddPostContainer = () => {
     const [showPopup, setShowPopup] = useState(false);
-    const [content, setContent] = useState('');
-    const [image, setImage] = useState(null);
     const {insertPostMutation}=useInsertPost();
-    
+    const { register, handleSubmit,formState:{ errors } } =useForm<AddPostForm>();
+    const userId = useContext(authContext).authState.userId ??  "";   
+  
     const addPostClick = () => {
         setShowPopup(true);
     }
     const closePopupClick = () => {
         setShowPopup(false);
     }
-    const savePostClick = () => {
-        setShowPopup(false);
-        const tags=content.split(" ").filter(word=>word.startsWith("#"));
-        // store tags as string separated by comma
-        const tagsString=tags.join(",");
-        insertPostMutation.mutate({userId:'651986c46a089e4b7139f172',content:content,image:image,tags:tagsString});
+    const onSubmit:SubmitHandler<AddPostForm>=async(data)=>{
+      const {content,image}=data;
+      const tags=content.split(" ").filter(word=>word.startsWith("#"));
+      // store tags as string separated by comma
+      const tagsString=tags.join(",");
+      insertPostMutation.mutate({userId:userId,content:content,image:image,tags:tagsString});
+      setShowPopup(false);
     }
-    const changeContent = (e:any) => {
-        setContent(e.target.value);
-    }
-    const changeImage=(event:any)=>{
-      setImage(event.target.files[0]);
-    }
+
   return(
     <>
     <AddPost addPostClick={addPostClick}/>
     {
-    showPopup && <PopupAddPost content={content} image={image!} changeContent={changeContent} changeImage={changeImage}
-     closePopupClick={closePopupClick} savePostClick={savePostClick} /> 
+    showPopup && <PopupAddPost onSubmit={onSubmit} errors={errors} handleSubmit={handleSubmit} register={register} 
+     closePopupClick={closePopupClick}  /> 
     }
     </>
   )

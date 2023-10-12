@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { colors } from "../colors";
 import { CardContainerProps } from "../types/post/Types";
 import useDeleteLike from "../hooks/like/useDeleteLike";
@@ -7,6 +7,8 @@ import useInsertLike from "../hooks/like/useInsertLike";
 import useInsertUnLike from "../hooks/unLike/useInsertUnLike";
 import useInsertComment from "../hooks/comment/useInsertComment";
 import Card from "../components/post/Card";
+import authContext from "../context/AuthContextProvider";
+
 
 
 export const CardContainer=(props:CardContainerProps)=>{
@@ -19,18 +21,19 @@ export const CardContainer=(props:CardContainerProps)=>{
     const {insertLikeMutation} =useInsertLike();
     const {insertUnLikeMutation}=useInsertUnLike();
     const {insertCommentMutation}=useInsertComment();
+    const userId = useContext(authContext).authState.userId ??  ""; 
 
     useEffect(()=>{
        // if props.post.likes contains the current user id, set the likeColor to colors.TEXT_BLUE_600
        props.post.likes.forEach(like=>{
-              if(like.userId==="65140e65af6c4553738705f7"){
+              if(like.userId===userId){
                 setLikeColor(colors.TEXT_BLUE_600);
               }
             })
        // if props.post.unLikes contains the current user id, set the unlikeColor to colors.TEXT_RED_600
        props.post.unLikes.forEach(unlike=>{
         console.log("unlike.userId:"+unlike.userId);
-            if(unlike.userId==="65140e65af6c4553738705f7"){
+            if(unlike.userId===userId){
                 
               setUnlikeColor(colors.TEXT_RED_600);
             }
@@ -91,22 +94,22 @@ export const CardContainer=(props:CardContainerProps)=>{
     const changelikeColor=(postId:string)=>{
         if(likeColor===""){
             setLikeColor(colors.TEXT_BLUE_600) ;
-            props.post.likes.push({id:"",userId:"65140e65af6c4553738705f7",postId:postId});
-            insertLikeMutation.mutate({postId:postId,userId:"65140e65af6c4553738705f7"});
+            props.post.likes.push({id:"",userId:userId,postId:postId});
+            insertLikeMutation.mutate({postId:postId,userId:userId});
             if(unlikeColor!==""){
                 setUnlikeColor("");
                 console.log("getUnLikeId:");
-                deleteUnLikeMutation.mutate(getUnLikeId("65140e65af6c4553738705f7"));
+                deleteUnLikeMutation.mutate(getUnLikeId(userId));
                 // delete the unlike with this id from the array props.post.unLikes
                 const newUnLikes=props.post.unLikes.filter((unLike)=>
-                    unLike.id!==getUnLikeId("65140e65af6c4553738705f7")
+                    unLike.id!==getUnLikeId(userId)
                 )
                 props.post.unLikes=newUnLikes;
             }
         }
         else{
             setLikeColor("");
-            deleteLikeMutation.mutate(getLikeId("65140e65af6c4553738705f7"));
+            deleteLikeMutation.mutate(getLikeId(userId));
             props.post.likes.pop();
         } 
         
@@ -114,28 +117,28 @@ export const CardContainer=(props:CardContainerProps)=>{
     const changeUnlikeColor=(postId:string)=>{
         if(unlikeColor===""){
             setUnlikeColor(colors.TEXT_RED_600) ;
-            props.post.unLikes.push({id:"",userId:"65140e65af6c4553738705f7",postId:postId});
-            insertUnLikeMutation.mutate({postId:postId,userId:"65140e65af6c4553738705f7"});
+            props.post.unLikes.push({id:"",userId:userId,postId:postId});
+            insertUnLikeMutation.mutate({postId:postId,userId:userId});
             if(likeColor!==""){
                 setLikeColor("");
-                deleteLikeMutation.mutate(getLikeId("65140e65af6c4553738705f7"));
+                deleteLikeMutation.mutate(getLikeId(userId));
                 // delete the unlike with this id from the array props.post.unLikes
                 const newLikes=props.post.likes.filter((like)=>
-                    like.id!==getLikeId("65140e65af6c4553738705f7")
+                    like.id!==getLikeId(userId)
                 )
                 props.post.likes=newLikes;
             }
         }
          else{
             setUnlikeColor("");
-            deleteUnLikeMutation.mutate(getUnLikeId("65140e65af6c4553738705f7"));
+            deleteUnLikeMutation.mutate(getUnLikeId(userId));
             props.post.unLikes.pop();
          }
         setLikeColor("");
     }
     const addComment=()=>{
         if(comment!==""){ 
-        insertCommentMutation.mutate({postId:props.post.id,userId:"65140e65af6c4553738705f7",comment:comment});
+        insertCommentMutation.mutate({postId:props.post.id,userId:userId,comment:comment});
         setComment("");    
         }
         }
