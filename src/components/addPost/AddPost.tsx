@@ -1,8 +1,22 @@
 import PROFILE from '../../images/profile.png'
 import { AiOutlinePlus } from 'react-icons/ai';
 import { AddPostProps } from '../../types/Types';
+import React from 'react';
+import Typed from 'typed.js';
 
 export default function AddPost(props:AddPostProps) {
+  const el = React.useRef(null);
+  React.useEffect(() => {
+    const typed = new Typed(el.current, {
+      strings: ['Add new post'],
+      typeSpeed: 50,
+      backSpeed: 50,
+      loop: true
+    });
+    return () => {
+      typed.destroy();
+    };
+  }, []);
 return(
     <div className='flex flex-row items-center justify-center m-4 '>
        <div><button>
@@ -20,7 +34,7 @@ return(
                   border-none outline-none
                 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 
                 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" 
-                placeholder="Add Post" required />
+                ref={el} required />
                 <button onClick={props.addPostClick} type="submit" 
                 className="absolute h-9 top-0 right-0 p-2 text-sm 
                 font-medium  text-black  rounded-r-lg 

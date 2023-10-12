@@ -1,7 +1,7 @@
-import { Field, FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from "react-hook-form"
+import { Field, FieldError, FieldErrors, Merge, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from "react-hook-form"
 
 export type AddPostProps={
-    addPostClick:()=>void
+    addPostClick:()=>void;
 }
 export type FormHeaderProps={
     closePopupClick:()=>void
@@ -88,3 +88,13 @@ export type UserData = {
     email: string;
 };
 
+export type ErrorProps={
+    error:FieldError|undefined|Merge<FieldError, (FieldError | undefined)[]> | undefined;
+  }
+export type AddCommentForm={
+    comment:string;
+}
+export type MessageProps={
+    message:string;
+    action:string;
+}

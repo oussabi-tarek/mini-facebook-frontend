@@ -22,7 +22,7 @@ return(
                       border-none outline-none
                     dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 
                     dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" 
-                    placeholder="Search by Content" required />
+                    placeholder="Search by Content | Hashtag" required />
                     <button type="submit" className="absolute h-9 top-0 right-0 p-2 text-sm 
                     font-medium  text-black  rounded-r-lg 
                       dark:bg-blue-600 dark:hover:bg-blue-700 

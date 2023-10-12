@@ -1,5 +1,4 @@
 import PROFILE from '../../images/profile.png'
-import POST from '../../images/post.jpg';
 import {AiOutlineLike} from "react-icons/ai";
 import {BiDislike} from "react-icons/bi";
 import {FaRegComment} from "react-icons/fa";
@@ -21,8 +20,10 @@ export default function Card(props:CardProps){
             </div>   
             <div className='flex flex-col items-left mt-1 ml-10 mr-10'>
                 <p className='mb-3 dark:text-white'>{props.formatContent(props.post.content)}</p>
-                <img  src={ props.post.images[0]!==undefined ?  props.getImageFromBytes(props.post.images[0].imageBytes):POST} className='w-83 h-83'/>
-            </div>
+                {props.post.images[0]!==undefined &&
+                <img  src={props.getImageFromBytes(props.post.images[0].imageBytes)} className='w-83 h-83'/>
+                }
+                 </div>
             <div className='flex flex-row  justify-between  ml-10 mt-3 mb-2 w-full'>
                 <div className="flex flex-row">
                 <div className='flex flex-row'>
@@ -62,8 +63,8 @@ export default function Card(props:CardProps){
                })
             }
              {props.isVisible && 
-                <AddComment addComment={props.addComment} comment={props.comment} 
-                  changeComment={props.changeComment} />
+                <AddComment register={props.register} onSubmit={props.onSubmit} 
+                handleSubmit={props.handleSubmit} errors={props.errors}  />
             }
         </div>
     );
