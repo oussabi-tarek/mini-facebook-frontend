@@ -72,8 +72,13 @@ export type LoginInputs = {
 export type RegisterInputs = {
     firstName: string,
     lastName: string,
+    username: string,
     email: string,
     password: string,
+    confirmPassword: string,
+    localisation: string,
+    bibliographie: string,
+    numberPhone: string,
     image: any
 }
 export type AuthProviderProps = {
