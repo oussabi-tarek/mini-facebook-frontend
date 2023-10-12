@@ -13,7 +13,8 @@ function Profile(){
     console.log("userId : ", user.authState.userId);
 
     const {status, userData, error} = useGetUser(user.authState.userId);
-    console.log("status: ", status , " userData : " , userData)
+    console.log("userDAta: ", userData)
+    // console.log("status: ", status , " userData : " , userData)
     const {updateUserMutation} = useUpdateUser();
 
  const updateUser = (userId: string, user: updateUserInput) => {
@@ -30,12 +31,12 @@ const handleUpdateUser = (userId: string, user: updateUserInput) =>{
                     <AsideProfile user={userData} updateUserClick={handleUpdateUser} />
                 </div>
                 <div className="col-span-7">
-                    <MainProfile/>
+                    <MainProfile user={userData}/>
                 </div>
             </div>
         </>
     )
-
+// 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
 }
 
 export default Profile;
