@@ -1,3 +1,4 @@
+import { Field, FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from "react-hook-form"
 
 export type AddPostProps={
     addPostClick:()=>void
@@ -7,12 +8,14 @@ export type FormHeaderProps={
 }
 export type PopupProps={
     closePopupClick:()=>void;
-    savePostClick:()=>void;
+    register:UseFormRegister<AddPostForm>;
+    errors:FieldErrors<AddPostForm>;
+    handleSubmit: UseFormHandleSubmit<AddPostForm, undefined>;
+    onSubmit: SubmitHandler<AddPostForm>;
+}
+export type AddPostForm={
     content:string;
-    changeContent:(e:any)=>void;
     image:File;
-    changeImage:(e:any)=>void;
-
 }
 export type User={
     id:string;

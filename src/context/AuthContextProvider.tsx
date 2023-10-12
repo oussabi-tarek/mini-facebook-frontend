@@ -6,12 +6,11 @@ import React, {
   useState,
 } from "react";
 import authReducer, { AuthState, defaultAuthState } from "./authReducer";
-import { Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { AuthActionEnum } from "./authActions";
 import LoginPage from "../components/login/LoginPage";
 import SignUpPage from "../components/register/SignUpPage";
 import { ENDPOINTS } from "../hooks/endpoint";
-import { useAxios } from "../hooks/axios/useAxios";
 import { AuthProviderProps, UserData } from "../types/Types";
 import axios from "axios";
 import Spinner from "../components/spinner/Spinner";
@@ -40,7 +39,7 @@ export const AuthContextProvider = (props: AuthProviderProps)=>{
     const axiosInstance = axios.create({
       baseURL: process.env.REACT_APP_VITE_API_BASE_URL,
     });
-    console.log("PATH "+path);
+   
     useEffect(() => {
         const user = localStorage.getItem("user");
         if (user) {
@@ -76,6 +75,7 @@ export const AuthContextProvider = (props: AuthProviderProps)=>{
           setIsLoading(false);
         }
       }, [authState.authToken]);
+
     const globalLogInDispatch = useCallback(
       (props: UserData) => {
         const { authToken, refreshToken, email, name, userId } = props;
