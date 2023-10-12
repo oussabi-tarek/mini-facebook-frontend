@@ -81,7 +81,7 @@ export type AuthProviderProps = {
     children : React.ReactElement;
 }
   
-export type UserData = {
+export type UserData={
     authToken: string;
     refreshToken: string;
     userId: string;

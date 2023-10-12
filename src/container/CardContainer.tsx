@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { colors } from "../colors";
 import { CardContainerProps } from "../types/post/Types";
 import useDeleteLike from "../hooks/like/useDeleteLike";
@@ -7,6 +7,7 @@ import useInsertLike from "../hooks/like/useInsertLike";
 import useInsertUnLike from "../hooks/unLike/useInsertUnLike";
 import useInsertComment from "../hooks/comment/useInsertComment";
 import Card from "../components/post/Card";
+import authContext from "../context/AuthContextProvider";
 
 
 export const CardContainer=(props:CardContainerProps)=>{
@@ -20,16 +21,18 @@ export const CardContainer=(props:CardContainerProps)=>{
     const {insertUnLikeMutation}=useInsertUnLike();
     const {insertCommentMutation}=useInsertComment();
 
+     const userId =useContext(authContext).authState.userId ??  "651986c46a089e4b7139f172";
+
     useEffect(()=>{
        // if props.post.likes contains the current user id, set the likeColor to colors.TEXT_BLUE_600
        props.post.likes.forEach(like=>{
-              if(like.userId==="65140e65af6c4553738705f7"){
+              if(like.userId===userId){
                 setLikeColor(colors.TEXT_BLUE_600);
               }
             })
        // if props.post.unLikes contains the current user id, set the unlikeColor to colors.TEXT_RED_600
        props.post.unLikes.forEach(unlike=>{
-        console.log("unlike.userId:"+unlike.userId);
+        console.log("unlike.userId:"+userId);
             if(unlike.userId==="65140e65af6c4553738705f7"){
                 
               setUnlikeColor(colors.TEXT_RED_600);

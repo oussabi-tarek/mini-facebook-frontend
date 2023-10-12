@@ -11,32 +11,32 @@ const PopupEditProfile = (props: PopupEditUserProps) => {
     }
 
     return(
-        <div className="fixed inset-0 flex items-center justify-center z-50 mt-12 ">
+    <div className="fixed inset-0 flex items-center justify-center z-50 mt-12 ">
       <div className="custom-popup bg-white rounded-xl shadow-lg p-3 ">
         <div className='relative'>
              <div className="mb-6 child p-9">
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">    
                 <div className="mb-3">
-                    <label htmlFor="firstName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Bio</label>
+                    <label htmlFor="firstName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
                     <input id="firstName" defaultValue={props.user.firstName} {...register("firstName")} className="block w-full bg-black text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="text" />
                 </div>  
                 <div className="mb-3">
-                    <label htmlFor="lastName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Bio</label>
+                    <label htmlFor="lastName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">last Name</label>
                     <input id="lastName" defaultValue={props.user.lastName} {...register("lastName")} className="block w-full bg-black text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="text" />
                 </div> 
                  <div className="mb-3">
-                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Bio</label>
+                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">email</label>
                     <input id="email" defaultValue={props.user.email} {...register("email")} className="block w-full bg-black text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="email" />
                 </div>  
 
                 <div className="mb-3">
-                    <label htmlFor="location" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Bio</label>
+                    <label htmlFor="location" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location</label>
                     <input id="location" defaultValue={props.user.location} {...register("location")} placeholder="Marrakech, Sidi Abbad" className="block w-full bg-black text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="text" />
                 </div>  
 
                 <div className="mb-3">
-                    <label htmlFor="bio" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Bio</label>
-                    <textarea id="bio" defaultValue={props.user.biography} {...register("biography")} rows={9} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
+                    <label htmlFor="bio" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">About You</label>
+                    <textarea id="bio" defaultValue={props.user.biography} {...register("biography")} rows={9} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Am Mr X, from ..."></textarea>
                 </div>
                
                 <div className="grid justify-items-end">

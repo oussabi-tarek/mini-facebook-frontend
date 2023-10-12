@@ -14,7 +14,6 @@ function Profile(){
 
     const {status, userData, error} = useGetUser(user.authState.userId);
     console.log("userDAta: ", userData)
-    // console.log("status: ", status , " userData : " , userData)
     const {updateUserMutation} = useUpdateUser();
 
  const updateUser = (userId: string, user: updateUserInput) => {

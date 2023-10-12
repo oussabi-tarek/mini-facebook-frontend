@@ -40,3 +40,15 @@ export type AddCommentProps={
      changeComment: (event:any) => void;
      
 }
+
+export type PopupEditPostprops={
+     handlePopup : () => void | undefined;
+     submitUpdatePost : (post : Post) => void | undefined;
+     myPost : Post| undefined ;
+}
+
+export type PopupDeleteProps={
+     handlePopup : () => void;
+     submitDelete : (postId : string) => void | any;
+     postToDelete : string;
+}
