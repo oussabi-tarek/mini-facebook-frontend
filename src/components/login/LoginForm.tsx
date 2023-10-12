@@ -8,7 +8,7 @@ import {sendLogin} from "../../hooks/login/useLogin";
 import Spinner from "../spinner/Spinner";
 
 export default function LoginForm(){
-    const {register, handleSubmit} = useForm<LoginInputs>();
+    const {register, handleSubmit, formState} = useForm<LoginInputs>();
     const authenticationContext = useContext(authContext);
     
     const onSubmit = async (data: LoginInputs) => {
@@ -26,17 +26,24 @@ export default function LoginForm(){
             className="w-full max-w-md mx-auto mb-12 px-4">
             <div className="mb-5">
                 <input
-                    {...register("email")}
-                    className="border border-gray-400 rounded w-full text-gray-500 mr-3 py-3 px-2 leading-tight focus:outline-none"
+                    {...register("email", {
+                        required:{value: true, message: "Email is required"},
+                        pattern:{value:/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, message: "Invalide email format"}})
+                    }
+                    className={`border ${formState.errors.email?`border-red-500`:`border-gray-400`} rounded w-full text-gray-500 mr-3 py-3 px-2 leading-tight focus:outline-none`}
                     type="email"
                     placeholder="Email"/>
+                <span className="text-red-500">{formState.errors.email?.message}</span>
             </div>
             <div className="mb-5">
                 <input
-                    {...register("password")}
-                    className="border border-gray-400 rounded w-full text-gray-500 mr-3 py-3 px-2 leading-tight focus:outline-none" 
+                    {...register("password", {
+                        required:{value: true, message: "Password is required"},
+                    })}
+                    className={`border ${formState.errors.email?`border-red-500`:`border-gray-400`} rounded w-full text-gray-500 mr-3 py-3 px-2 leading-tight focus:outline-none`}
                     type="password" 
                     placeholder="Password"/>
+                <span className="text-red-500">{formState.errors.password?.message}</span>
             </div>
             <div
                 className="mb-8">
