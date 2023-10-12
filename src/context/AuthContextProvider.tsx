@@ -14,6 +14,7 @@ import { ENDPOINTS } from "../hooks/endpoint";
 import { AuthProviderProps, UserData } from "../types/Types";
 import axios from "axios";
 import Spinner from "../components/spinner/Spinner";
+import { ConnectionRefused } from "../components/error/ConnectionRefused";
 
 
 
@@ -35,6 +36,7 @@ export const AuthContextProvider = (props: AuthProviderProps)=>{
     const navigate = useNavigate();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(false);
     const path = window.location.pathname;
     const axiosInstance = axios.create({
       baseURL: process.env.REACT_APP_VITE_API_BASE_URL,
@@ -44,7 +46,6 @@ export const AuthContextProvider = (props: AuthProviderProps)=>{
         const user = localStorage.getItem("user");
         if (user) {
           const userData: UserData = JSON.parse(user);
-          console.log(userData);
           const formData = new URLSearchParams();
           formData.append("token", userData.authToken);
           const config = {
@@ -53,10 +54,9 @@ export const AuthContextProvider = (props: AuthProviderProps)=>{
             }
           };
           const validateToken = async () => {
+            try{
             let response = await axiosInstance.post(ENDPOINTS.VALIDATE_TOKEN,formData.toString(),config);
-            console.log(response.data);
             if(response.status === 200){
-              console.log("is active : " + response.data.active);
               if(response.data.active) {
                 authDispatch({ type: AuthActionEnum.LOG_IN, payload: userData });
                 setIsAuthenticated(response.data.active);
@@ -67,7 +67,16 @@ export const AuthContextProvider = (props: AuthProviderProps)=>{
             else{
               navigate("/login");
             }
+            // err connection refused
+            if(response.status === 500){
+              console.log(response);
+              navigate("/login");
+            }
             setIsLoading(false);
+          }catch(err){
+          setIsLoading(false);
+           setError(true);
+          }
          };
          validateToken();
         }
@@ -90,8 +99,6 @@ export const AuthContextProvider = (props: AuthProviderProps)=>{
           },
         });
         navigate("/");
-        console.log("LOGIN DISPATCH");
-        console.log(props);
       },
       [navigate]
   );
@@ -107,6 +114,11 @@ export const AuthContextProvider = (props: AuthProviderProps)=>{
   if(isLoading){
     return(
       <Spinner />
+    )
+  }
+  if(error){
+    return(
+      <ConnectionRefused />
     )
   }
   return (
