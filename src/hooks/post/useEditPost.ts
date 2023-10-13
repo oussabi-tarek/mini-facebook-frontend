@@ -2,14 +2,20 @@ import { AxiosInstance } from "axios";
 import { ENDPOINTS } from "../endpoint";
 import { useAxios } from "../axios/useAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Post } from "../../types/post/Types";
 
 
 const updatePostFn = async (
     axios: AxiosInstance,
-   post : Post
+    formData: {postId:string, userId:string, content:string, image:any,tags:string}
   ) => {
-    const response = await axios.put(`${ENDPOINTS.POSTS}/${post.id}`, post,{
+    const form = new FormData();
+    form.append("content", formData.content);
+    form.append("userId", formData.userId);
+    form.append("file", formData.image);
+    form.append("tags",formData.tags);
+    console.log("postIdRequest :  ", formData.postId);
+    console.log("url : " ,`${ENDPOINTS.POSTS}/${formData.postId}` );
+    const response = await axios.put(`${ENDPOINTS.POSTS}/${formData.postId}`, form,{
         headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -22,8 +28,8 @@ const updatePostFn = async (
     const queryClient = useQueryClient()
   
     const updatePostMutation = useMutation({
-    mutationFn:   (post: Post) =>
-        updatePostFn(axios, post),
+    mutationFn:   (formData:{postId: string, userId:string, content:string,image:any,tags:string}) =>
+        updatePostFn(axios, formData),
         onSuccess:async()=>{
             queryClient.invalidateQueries(["fetchUserPosts"]);
         }

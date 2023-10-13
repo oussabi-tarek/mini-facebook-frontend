@@ -2,12 +2,6 @@ import "../../styles/PopupEditProfile.css"
 import { PopupDeleteProps} from "../../types/post/Types";
 
 const PopupDeletePost = (props: PopupDeleteProps ) => {
-    
-    const deleteConfirm = () => {
-        props.submitDelete(props.postToDelete);
-        props.handlePopup();
-    }
-
 
     return(
     <div className="fixed inset-0 flex items-center justify-center z-50 mt-12 ">
@@ -22,7 +16,7 @@ const PopupDeletePost = (props: PopupDeleteProps ) => {
                     </div>
                     <div className="flex items-end p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                             <button type="button" onClick={props.handlePopup} className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Cancel</button>
-                            <button type="button" onClick={deleteConfirm} className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Confirm</button>
+                            <button type="button" onClick={props.submitDelete} className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Confirm</button>
                     </div>
                 </div>
               

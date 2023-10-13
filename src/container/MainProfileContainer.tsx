@@ -1,4 +1,4 @@
-import { User } from "../types/Types";
+import { Image, User } from "../types/Types";
 import { AddPostContainer } from "./AddPostContainer";
 import { CardContainer } from "./CardContainer";
 import EDIT from "../images/editMe.png";
@@ -16,37 +16,51 @@ const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statu
     const [showPopupDelete, setShowPopupDelete] = useState<boolean>(false);
     const [selectedPost, setSelectedPost] = useState<Post>();
     const [postId , setPostId] = useState<string>("");
-
-    console.log("userId : ", user.id);
-        console.log("userPosted : ", posts)
-
+    const [content, setContent] = useState<string>('');
+    const [image, setImage] = useState<any>();
 
      const {updatePostMutation} = useEditPost();
      const {deletePostMutation} = useDeletePost();
 
-    const handleUpdatePost = (postToEdit : Post) => {
-        updatePostMutation.mutateAsync(postToEdit);
+    const handleUpdatePost = () => {
+        const userId : string = user.id;
+        const tags=content.split(" ").filter(word=>word.startsWith("#"));
+        const tagsString=tags.join(",");
+        const post_id : string = selectedPost?.id ?? "";
+        updatePostMutation.mutateAsync({postId:post_id, userId:userId , content:content,image:image,tags:tagsString});
+        handlePopup();
+        console.log("updatitiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+    }
+    const changeContent = (e:any) => {
+        setContent(e.target.value);
+    }
+    const changeImage=(event:any)=>{
+      setImage(event.target.files[0]);
     }
 
     const handlePopup = () => setShowPopup(!showPopup);
     const handleDeletePopup = () => setShowPopupDelete(!showPopupDelete);
 
-    console.log("user: ", user);
     const myPosts : Post[] = posts
-    console.log("postmlqsjf : ", myPosts)
 
     
     const handleEdit = (paramPost : Post) => {
-        console.log("update : ", paramPost)
         setSelectedPost(paramPost);
+        let tagContent : string = "";
+        if(paramPost.tages && paramPost.tages.length > 0){
+             tagContent = paramPost?.tages.map((elt) => elt.content).join(' ') ?? "";
+        }
+        setContent(paramPost.content + " " + tagContent);
         handlePopup()
     }
     const handleDelete = (postId : string) => {
         setPostId(postId)
         handleDeletePopup();
     }
-    const submitPostToDelete = (postId : string) => {
+    const submitPostToDelete = () => {
         deletePostMutation.mutateAsync(postId);
+        handleDeletePopup();
+        console.log("deleteddddddddddddddddddddddd");
     }
     return(
         <>
@@ -62,7 +76,7 @@ const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statu
 
                 </div>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col m-auto">
                 {statusPost && statusPost === "loading" && (
                     <div role="status">
                         <svg aria-hidden="true" className="inline w-10 h-10 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -90,16 +104,16 @@ const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statu
                     ) 
                     })
                  }
-                 {myPosts && myPosts.length === 0 && (
+                 {statusPost === "success" && myPosts && myPosts.length === 0 && (
                     <div className="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400">You don't have any post Yet ? Go And add one !</div>
                  )}
             </div>
         </div>
          {showPopup && (
-            <PopupEditPost handlePopup={handlePopup} submitUpdatePost={handleUpdatePost} myPost={selectedPost} />
+            <PopupEditPost handlePopup={handlePopup} submitUpdatePost={handleUpdatePost} content={content} image={image!} changeContent={changeContent} changeImage={changeImage} />
         )} 
         {showPopupDelete && (
-            <PopupDeletePost handlePopup={handleDeletePopup} submitDelete={handleDelete} postToDelete={postId} />
+            <PopupDeletePost handlePopup={handleDeletePopup} submitDelete={submitPostToDelete}/>
         )}
       
         </>
