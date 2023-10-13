@@ -13,8 +13,6 @@ import { AddCommentForm } from "../types/Types";
 import { Message } from "../components/modal/Message";
 import { STATE } from "../states";
 
-
-
 export const CardContainer=(props:CardContainerProps)=>{
     const [isVisible,setIsVisible]=useState(false);
     const [likeColor,setLikeColor]=useState("");
@@ -28,6 +26,8 @@ export const CardContainer=(props:CardContainerProps)=>{
     const {insertCommentMutation}=useInsertComment();
     const userId = useContext(authContext).authState.userId ??  ""; 
 
+     const userId =useContext(authContext).authState.userId ??  "651986c46a089e4b7139f172";
+
     useEffect(()=>{
        // if props.post.likes contains the current user id, set the likeColor to colors.TEXT_BLUE_600
        props.post.likes.forEach(like=>{
@@ -37,6 +37,8 @@ export const CardContainer=(props:CardContainerProps)=>{
             })
        // if props.post.unLikes contains the current user id, set the unlikeColor to colors.TEXT_RED_600
        props.post.unLikes.forEach(unlike=>{
+
+        console.log("unlike.userId:"+userId);
             if(unlike.userId===userId){
               setUnlikeColor(colors.TEXT_RED_600);
             }

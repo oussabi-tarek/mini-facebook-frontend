@@ -25,7 +25,7 @@ export const HomeContainer = () => {
     {
       status===STATE.LOADING ? <Spinner/> :
             posts.map((post,index)=>{
-             return <CardContainer key={index}  post={post} />
+             return <CardContainer key={index}  post={post} isProfile={false} />
             })
     }
     {

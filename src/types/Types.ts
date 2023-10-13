@@ -1,3 +1,5 @@
+
+import { Post } from "./post/Types"
 import { Field, FieldError, FieldErrors, Merge, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from "react-hook-form"
 
 export type AddPostProps={
@@ -24,6 +26,9 @@ export type User={
     email:string;
     password:string;
     createdAt:string;
+    location: string;
+    biography: string;
+    userPosts: Post[];
 }
 export type Like={
     id:string;
@@ -85,7 +90,7 @@ export type AuthProviderProps = {
     children : React.ReactElement;
 }
   
-export type UserData = {
+export type UserData={
     authToken: string;
     refreshToken: string;
     userId: string;
