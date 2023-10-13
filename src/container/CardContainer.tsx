@@ -26,8 +26,6 @@ export const CardContainer=(props:CardContainerProps)=>{
     const {insertCommentMutation}=useInsertComment();
     const userId = useContext(authContext).authState.userId ??  ""; 
 
-     const userId =useContext(authContext).authState.userId ??  "651986c46a089e4b7139f172";
-
     useEffect(()=>{
        // if props.post.likes contains the current user id, set the likeColor to colors.TEXT_BLUE_600
        props.post.likes.forEach(like=>{
@@ -232,7 +230,7 @@ export const CardContainer=(props:CardContainerProps)=>{
 
     return(
       <>
-      <Card isVisible={isVisible} likeColor={likeColor} unlikeColor={unlikeColor} 
+      <Card isProfile={props.isProfile} isVisible={isVisible} likeColor={likeColor} unlikeColor={unlikeColor} 
          formatContent={formatContent} register={register} handleSubmit={handleSubmit} errors={errors}
          onSubmit={onSubmit}
        changeLikeColor={changelikeColor} changeUnlikeColor={changeUnlikeColor} 

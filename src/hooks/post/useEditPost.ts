@@ -9,16 +9,20 @@ const updatePostFn = async (
     formData: {postId:string, userId:string, content:string, image:any,tags:string}
   ) => {
     const form = new FormData();
-    form.append("content", formData.content);
-    form.append("userId", formData.userId);
+    
+    const postCommand={
+        content:formData.content,
+        userId:formData.userId,
+        tags:formData.tags==="" ? []:formData.tags,
+        images:[]
+    }
     form.append("file", formData.image);
-    form.append("tags",formData.tags);
-    console.log("postIdRequest :  ", formData.postId);
-    console.log("url : " ,`${ENDPOINTS.POSTS}/${formData.postId}` );
+    form.append("post",JSON.stringify(postCommand));
     const response = await axios.put(`${ENDPOINTS.POSTS}/${formData.postId}`, form,{
         headers: {
             "Content-Type": "multipart/form-data",
           },
+
     });
     return response.data;
   };

@@ -48,7 +48,7 @@ export type PopupEditPostprops={
      handlePopup : () => void | undefined;
      submitUpdatePost : () => void;
      content : string;
-     image: any;
+     image: File;
      changeContent: (e:any) => void;
      changeImage: (event:any) => void;
 }
@@ -56,5 +56,4 @@ export type PopupEditPostprops={
 export type PopupDeleteProps={
      handlePopup : () => void;
      submitDelete : () => void | any;
-}
 }
