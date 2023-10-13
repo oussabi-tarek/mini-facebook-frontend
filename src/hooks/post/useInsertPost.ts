@@ -9,10 +9,10 @@ const insertPostFn = async (
     formData: {userId:string, content:string, image:any,tags:string}
   ) => {
     const form = new FormData();
+    formData.tags==="" ? form.append("tags","no_tags") : form.append("tags",formData.tags);
+    formData.image==="" ? form.append("image","no_image") : form.append("image",formData.image);
     form.append("content", formData.content);
     form.append("userId", formData.userId);
-    form.append("file", formData.image);
-    form.append("tags",formData.tags);
     const response = await axios.post(ENDPOINTS.POSTS, form,{
         headers: {
             "Content-Type": "multipart/form-data",

@@ -8,18 +8,23 @@ import useInsertUnLike from "../hooks/unLike/useInsertUnLike";
 import useInsertComment from "../hooks/comment/useInsertComment";
 import Card from "../components/post/Card";
 import authContext from "../context/AuthContextProvider";
-
+import { SubmitHandler, useForm } from "react-hook-form";
+import { AddCommentForm } from "../types/Types";
+import { Message } from "../components/modal/Message";
+import { STATE } from "../states";
 
 export const CardContainer=(props:CardContainerProps)=>{
     const [isVisible,setIsVisible]=useState(false);
     const [likeColor,setLikeColor]=useState("");
-    const [comment,setComment]=useState('');
+    const { register, handleSubmit,formState:{ errors } } =useForm<AddCommentForm>();
     const [unlikeColor,setUnlikeColor]=useState("");
+    const [showMessage, setShowMessage] = useState({show:false, message:"",action:""});
     const {deleteLikeMutation} =useDeleteLike();
     const {deleteUnLikeMutation} =useDeleteUnLike();
     const {insertLikeMutation} =useInsertLike();
     const {insertUnLikeMutation}=useInsertUnLike();
     const {insertCommentMutation}=useInsertComment();
+    const userId = useContext(authContext).authState.userId ??  ""; 
 
      const userId =useContext(authContext).authState.userId ??  "651986c46a089e4b7139f172";
 
@@ -32,9 +37,9 @@ export const CardContainer=(props:CardContainerProps)=>{
             })
        // if props.post.unLikes contains the current user id, set the unlikeColor to colors.TEXT_RED_600
        props.post.unLikes.forEach(unlike=>{
+
         console.log("unlike.userId:"+userId);
-            if(unlike.userId==="65140e65af6c4553738705f7"){
-                
+            if(unlike.userId===userId){
               setUnlikeColor(colors.TEXT_RED_600);
             }
        })       
@@ -44,19 +49,14 @@ export const CardContainer=(props:CardContainerProps)=>{
     const formatContent = (content:string) => {
         const regex = /#(\w+)/g;
         const regex2 = /(https?:\/\/[^\s]+)/g;
-        const tagparts = content.match(regex); // Use match to find all hashtags
-        const linkparts = content.match(regex2); // Use match to find all links
-        console.log("linkparts:"+linkparts);
-
+        const tagparts = content.match(regex); 
         if (!tagparts) {
-          return <span>{content}</span>; // Return the content as-is if there are no hashtags
+          return <span>{content}</span>; 
         }
-      
         const formattedContent = content.split(regex).map((part, index) => {
             part="#"+part;  
-          console.log("part:"+part);  
+  
           if (tagparts!==null && tagparts.includes(part)) {
-            // If the part is a hashtag, apply a different style
             return (
               <span key={index} className="text-yellow-500">
                 {part}
@@ -65,7 +65,6 @@ export const CardContainer=(props:CardContainerProps)=>{
           } else {
             part=part.substring(1);
             if(part.match(regex2)){
-                console.log("part.match(regex2):"+part.match(regex2));
                 return (
                     <a key={index} href={part}  className="text-blue-500 border-b-2 border-indigo-500">
                       {part}
@@ -75,11 +74,7 @@ export const CardContainer=(props:CardContainerProps)=>{
             else
                return <span key={index}>{part}</span>;
           }
-          
-
         });
-        
-      
         return formattedContent;
       };
       
@@ -94,22 +89,47 @@ export const CardContainer=(props:CardContainerProps)=>{
     const changelikeColor=(postId:string)=>{
         if(likeColor===""){
             setLikeColor(colors.TEXT_BLUE_600) ;
-            props.post.likes.push({id:"",userId:"65140e65af6c4553738705f7",postId:postId});
-            insertLikeMutation.mutate({postId:postId,userId:"65140e65af6c4553738705f7"});
+            props.post.likes.push({id:"",userId:userId,postId:postId});
+            insertLikeMutation.mutate({postId:postId,userId:userId},{
+              onSuccess: () => {
+              },
+              onError: () => {
+                setShowMessage({show:true, message:"Error inserting Like!Please try again",action:STATE.ERROR});
+                setTimeout(()=>{
+                  setShowMessage({show:false, message:"",action:""});
+                },2000);
+              },
+            });
             if(unlikeColor!==""){
                 setUnlikeColor("");
-                console.log("getUnLikeId:");
-                deleteUnLikeMutation.mutate(getUnLikeId("65140e65af6c4553738705f7"));
-                // delete the unlike with this id from the array props.post.unLikes
+                deleteUnLikeMutation.mutate(getUnLikeId(userId),{
+                  onSuccess: () => {
+                  },
+                  onError: () => {
+                    setShowMessage({show:true, message:"Error deleting Unlike!Please try again",action:STATE.ERROR});
+                    setTimeout(()=>{
+                      setShowMessage({show:false, message:"",action:""});
+                    },2000);
+                  },
+                });
                 const newUnLikes=props.post.unLikes.filter((unLike)=>
-                    unLike.id!==getUnLikeId("65140e65af6c4553738705f7")
+                    unLike.id!==getUnLikeId(userId)
                 )
                 props.post.unLikes=newUnLikes;
             }
         }
         else{
             setLikeColor("");
-            deleteLikeMutation.mutate(getLikeId("65140e65af6c4553738705f7"));
+            deleteLikeMutation.mutate(getLikeId(userId),{
+              onSuccess: () => {
+              },
+              onError: () => {
+                setShowMessage({show:true, message:"Error deleting Like!Please try again",action:STATE.ERROR});
+                setTimeout(()=>{
+                  setShowMessage({show:false, message:"",action:""});
+                },2000);
+              },
+            });
             props.post.likes.pop();
         } 
         
@@ -117,31 +137,69 @@ export const CardContainer=(props:CardContainerProps)=>{
     const changeUnlikeColor=(postId:string)=>{
         if(unlikeColor===""){
             setUnlikeColor(colors.TEXT_RED_600) ;
-            props.post.unLikes.push({id:"",userId:"65140e65af6c4553738705f7",postId:postId});
-            insertUnLikeMutation.mutate({postId:postId,userId:"65140e65af6c4553738705f7"});
+            props.post.unLikes.push({id:"",userId:userId,postId:postId});
+            insertUnLikeMutation.mutate({postId:postId,userId:userId},{
+              onSuccess: () => {
+              },
+              onError: () => {
+                setShowMessage({show:true, message:"Error inserting UnLike!Please try again",action:STATE.ERROR});
+                setTimeout(()=>{
+                  setShowMessage({show:false, message:"",action:""});
+                },2000);
+              },
+            });
             if(likeColor!==""){
                 setLikeColor("");
-                deleteLikeMutation.mutate(getLikeId("65140e65af6c4553738705f7"));
-                // delete the unlike with this id from the array props.post.unLikes
+                deleteLikeMutation.mutate(getLikeId(userId),{
+                  onSuccess: () => {
+                  },
+                  onError: () => {
+                    setShowMessage({show:true, message:"Error deleting Like!Please try again",action:STATE.ERROR});
+                    setTimeout(()=>{
+                      setShowMessage({show:false, message:"",action:""});
+                    },2000);
+                  },
+                });
                 const newLikes=props.post.likes.filter((like)=>
-                    like.id!==getLikeId("65140e65af6c4553738705f7")
+                    like.id!==getLikeId(userId)
                 )
                 props.post.likes=newLikes;
             }
         }
          else{
             setUnlikeColor("");
-            deleteUnLikeMutation.mutate(getUnLikeId("65140e65af6c4553738705f7"));
+            deleteUnLikeMutation.mutate(getUnLikeId(userId),{
+              onSuccess: () => {
+              },
+              onError: () => {
+                setShowMessage({show:true, message:"Error deleting UnLike! Please try again",action:STATE.ERROR});
+                setTimeout(()=>{
+                  setShowMessage({show:false, message:"",action:""});
+                },2000);
+              },
+            });
             props.post.unLikes.pop();
          }
         setLikeColor("");
     }
-    const addComment=()=>{
-        if(comment!==""){ 
-        insertCommentMutation.mutate({postId:props.post.id,userId:"65140e65af6c4553738705f7",comment:comment});
-        setComment("");    
+    
+    const onSubmit:SubmitHandler<AddCommentForm>=async(data)=>{
+        const {comment}=data;
+        if(comment!==""){
+          insertCommentMutation.mutate({postId:props.post.id,userId:userId,comment:comment},
+            {
+              onSuccess: () => {
+              },
+              onError: () => {
+                setShowMessage({show:true, message:"Error adding Comment!Please try again",action:STATE.ERROR});
+                setTimeout(()=>{
+                  setShowMessage({show:false, message:"",action:""});
+                },2000);
+              },
+            });
         }
-        }
+        
+    }
 
      const getLikeId=(userId:string)=>{
         const like=props.post.likes.find(like=>like.userId===userId);
@@ -157,10 +215,7 @@ export const CardContainer=(props:CardContainerProps)=>{
         }
         return "";
      }
-     const chnageComment=(event:any)=>{
-        setComment(event.target.value);
-     }
-    
+
     const getElapsedTime=(date:string)=>{
         const now=Date.now();
         const createdAt=new Date(date).getTime();
@@ -176,10 +231,16 @@ export const CardContainer=(props:CardContainerProps)=>{
     }
 
     return(
+      <>
       <Card isVisible={isVisible} likeColor={likeColor} unlikeColor={unlikeColor} 
-         formatContent={formatContent}
-       changeLikeColor={changelikeColor} changeUnlikeColor={changeUnlikeColor} comment={comment}
-       changeComment={chnageComment} addComment={addComment} getImageFromBytes={getImageFromBytes}
-       changeVisibility={changeVisibility}  post={props.post} getElapsedTime={getElapsedTime} isProfile={props.isProfile}/>
+         formatContent={formatContent} register={register} handleSubmit={handleSubmit} errors={errors}
+         onSubmit={onSubmit}
+       changeLikeColor={changelikeColor} changeUnlikeColor={changeUnlikeColor} 
+         getImageFromBytes={getImageFromBytes}
+       changeVisibility={changeVisibility}  post={props.post} getElapsedTime={getElapsedTime}/>
+      {
+       showMessage.show && <Message action={showMessage.action} message={showMessage.message} />
+      } 
+      </>
     )
 }

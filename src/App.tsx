@@ -7,6 +7,8 @@ import { HomeContainer } from './container/HomeContainer';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Profile from './container/ProfileContainer';
 
+import { ConnectionRefused } from './components/error/ConnectionRefused';
+
 const queryClient = new QueryClient();
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
       <AuthContextProvider>
          <QueryClientProvider client={queryClient}>
         <Routes>
+          <Route path='/NoResponse' element={<ConnectionRefused/>}/>
           <Route path='/login' element={<LoginPage />} />
           <Route path='/signup' element={<SignUpPage />} />
           <Route path='/' element={<HomeContainer />} />
@@ -22,7 +25,6 @@ function App() {
         </Routes>
          </QueryClientProvider>
       </AuthContextProvider>
-         
     </BrowserRouter> 
   );  
 }

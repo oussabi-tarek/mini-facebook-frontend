@@ -9,7 +9,11 @@ const fetchPostsQueryFn = async (
     axios: AxiosInstance,
     content: string
   ): Promise<Post[]> =>
-  axios.get( `${ENDPOINTS.POSTS}?content=${content}`).then((response) => response.data);
+  axios.get( `${ENDPOINTS.POSTS}`,{
+    params:{
+      content:content
+    }
+  }).then((response) => response.data);
 
 const useGetPosts = (content:string) => {
     const { axios } = useAxios();

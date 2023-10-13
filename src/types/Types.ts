@@ -1,19 +1,23 @@
+
 import { Post } from "./post/Types"
+import { Field, FieldError, FieldErrors, Merge, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from "react-hook-form"
 
 export type AddPostProps={
-    addPostClick:()=>void
+    addPostClick:()=>void;
 }
 export type FormHeaderProps={
     closePopupClick:()=>void
 }
 export type PopupProps={
     closePopupClick:()=>void;
-    savePostClick:()=>void;
+    register:UseFormRegister<AddPostForm>;
+    errors:FieldErrors<AddPostForm>;
+    handleSubmit: UseFormHandleSubmit<AddPostForm, undefined>;
+    onSubmit: SubmitHandler<AddPostForm>;
+}
+export type AddPostForm={
     content:string;
-    changeContent:(e:any)=>void;
     image:File;
-    changeImage:(e:any)=>void;
-
 }
 export type User={
     id:string;
@@ -73,8 +77,13 @@ export type LoginInputs = {
 export type RegisterInputs = {
     firstName: string,
     lastName: string,
+    username: string,
     email: string,
     password: string,
+    confirmPassword: string,
+    localisation: string,
+    bibliographie: string,
+    numberPhone: string,
     image: any
 }
 export type AuthProviderProps = {
@@ -89,3 +98,13 @@ export type UserData={
     email: string;
 };
 
+export type ErrorProps={
+    error:FieldError|undefined|Merge<FieldError, (FieldError | undefined)[]> | undefined;
+  }
+export type AddCommentForm={
+    comment:string;
+}
+export type MessageProps={
+    message:string;
+    action:string;
+}

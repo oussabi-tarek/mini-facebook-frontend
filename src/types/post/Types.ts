@@ -1,4 +1,5 @@
-import { Like, Tag, User,Image,Comment, UnLike } from "../Types";
+import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
+import { Like, Tag, User,Image,Comment, UnLike, AddCommentForm } from "../Types";
 
  
 export type Post={
@@ -25,9 +26,10 @@ export type CardProps={
      changeVisibility: () => void;   
      changeLikeColor: (postId:string) => void;
      changeUnlikeColor: (postId:string) => void; 
-     addComment: () => void; 
-     comment: string;
-     changeComment: (event:any) => void;
+     register:UseFormRegister<AddCommentForm>;
+     errors:FieldErrors<AddCommentForm>;
+     handleSubmit: UseFormHandleSubmit<AddCommentForm, undefined>;
+     onSubmit: SubmitHandler<AddCommentForm>;
      getImageFromBytes: (image: string) => string;
      formatContent: (content: string) => JSX.Element[]|JSX.Element;
      isProfile: boolean;
@@ -37,12 +39,11 @@ export type CardContainerProps={
 isProfile: boolean;
 }
 export type AddCommentProps={
-     addComment: () => void;
-     comment: string;
-     changeComment: (event:any) => void;
-     
+     register:UseFormRegister<AddCommentForm>;
+     errors:FieldErrors<AddCommentForm>;
+     handleSubmit: UseFormHandleSubmit<AddCommentForm, undefined>;
+     onSubmit: SubmitHandler<AddCommentForm>;
 }
-
 export type PopupEditPostprops={
      handlePopup : () => void | undefined;
      submitUpdatePost : () => void;
@@ -55,4 +56,5 @@ export type PopupEditPostprops={
 export type PopupDeleteProps={
      handlePopup : () => void;
      submitDelete : () => void | any;
+}
 }
