@@ -4,6 +4,7 @@ import MessageInput from "../components/chat/MessageInput";
 import {Message} from "../types/Types";
 import MessageList from "../components/chat/MessageList";
 import ChatHeader from "../components/chat/ChatHeader";
+import { SiChatbot } from "react-icons/si";
 
 export default function ChatAppContainer(){
     const [messages, setMessages] = useState<Message[]>([]);
@@ -20,11 +21,21 @@ export default function ChatAppContainer(){
     const closeChatBot = ()=>{
         setShowBot(false);
     }
+    const openChatBot = ()=>{
+        setShowBot(!showBot);
+    }
     return(
         <>
+        <div className="fixed bottom-5 right-5">
+            <button
+                onClick={openChatBot}
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">
+                <SiChatbot />
+            </button>
+        </div>
         {showBot && 
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg p-4">
+        <div className="fixed bottom-12 right-6">
+            <div className="max-w-md mx-auto bg-gray-100 rounded-lg shadow-lg p-4">
                     <ChatHeader closeChatBot={closeChatBot}/>
                 <div>
                     <MessageList messages={messages}/>

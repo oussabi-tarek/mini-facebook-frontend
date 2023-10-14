@@ -6,6 +6,7 @@ export default function MessageInput(props: MessageInputProp){
     const handleSendMessage = (e: FormEvent)=>{
         e.preventDefault();
         console.log("message : "+message);
+        // TODO : ICI ON DOIT ENVOYER PROMPT A L'API
         {message!=''&&props.onSendMessage(message)};
         setMessage('');
     }
