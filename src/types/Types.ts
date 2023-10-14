@@ -55,6 +55,7 @@ export type Image={
     url:string;
     file:any;
     imageBytes:any;
+    userId: string;
     isNew:boolean;
 }
 export type CommentSectionProps={

@@ -26,6 +26,8 @@ export const CardContainer=(props:CardContainerProps)=>{
     const {insertCommentMutation}=useInsertComment();
     const userId = useContext(authContext).authState.userId ??  ""; 
 
+    const isProfile : boolean = false;
+
     useEffect(()=>{
        // if props.post.likes contains the current user id, set the likeColor to colors.TEXT_BLUE_600
        props.post.likes.forEach(like=>{
@@ -235,7 +237,7 @@ export const CardContainer=(props:CardContainerProps)=>{
          onSubmit={onSubmit}
        changeLikeColor={changelikeColor} changeUnlikeColor={changeUnlikeColor} 
          getImageFromBytes={getImageFromBytes}
-       changeVisibility={changeVisibility}  post={props.post} getElapsedTime={getElapsedTime}/>
+       changeVisibility={changeVisibility}  post={props.post} getElapsedTime={getElapsedTime} handleEdit={props.handleEdit} handleDelete={props.handleDelete} />
       {
        showMessage.show && <Message action={showMessage.action} message={showMessage.message} />
       } 
