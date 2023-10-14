@@ -9,7 +9,7 @@ import AddComment from './AddComment';
 
 export default function Card(props:CardProps){
     return(
-        <div className="flex flex-col items-left w-9/12 h-10/12 mb-6 mt-6 ml-20 mr-20 bg-white border border-gray-200 rounded-lg shadow  hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+<div className={`flex ${props.isProfile ? 'flex-col' : 'flex-col'} items-left w-9/12 h-10/12 mb-6 mt-6 ml-20 mr-20 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700`}>
             <div className='flex flex-row m-4'>
             <img
                 className="h-10 w-10 rounded-full"

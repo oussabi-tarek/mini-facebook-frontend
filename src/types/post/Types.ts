@@ -32,13 +32,28 @@ export type CardProps={
      onSubmit: SubmitHandler<AddCommentForm>;
      getImageFromBytes: (image: string) => string;
      formatContent: (content: string) => JSX.Element[]|JSX.Element;
+     isProfile: boolean;
 }
 export type CardContainerProps={
   post: Post;
+isProfile: boolean;
 }
 export type AddCommentProps={
      register:UseFormRegister<AddCommentForm>;
      errors:FieldErrors<AddCommentForm>;
      handleSubmit: UseFormHandleSubmit<AddCommentForm, undefined>;
      onSubmit: SubmitHandler<AddCommentForm>;
+}
+export type PopupEditPostprops={
+     handlePopup : () => void | undefined;
+     submitUpdatePost : () => void;
+     content : string;
+     image: File;
+     changeContent: (e:any) => void;
+     changeImage: (event:any) => void;
+}
+
+export type PopupDeleteProps={
+     handlePopup : () => void;
+     submitDelete : () => void | any;
 }

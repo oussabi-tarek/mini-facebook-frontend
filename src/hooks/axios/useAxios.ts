@@ -4,7 +4,7 @@ import authContext from '../../context/AuthContextProvider';
 
 
 export const useAxios = () => {
-   const token=useContext(authContext).authState.authToken;
+   const token = useContext(authContext).authState.authToken;
   const axiosInstance = axios.create({
     baseURL: process.env.REACT_APP_VITE_API_BASE_URL,
   });
