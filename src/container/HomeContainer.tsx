@@ -7,6 +7,7 @@ import { STATE } from "../states";
 import Spinner from "../components/spinner/Spinner";
 import { Message } from "../components/modal/Message";
 import { Post } from "../types/post/Types";
+import ChatAppContainer from "./ChatContainer";
 
 
 export const HomeContainer = () => {
@@ -39,6 +40,7 @@ export const HomeContainer = () => {
       status===STATE.ERROR && <Message action={STATE.ERROR} message="Server Not Responding please try earlier" />
     }
     </div>
+    <ChatAppContainer />
     </>
   )
 }

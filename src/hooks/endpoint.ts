@@ -7,5 +7,6 @@ export const ENDPOINTS = {
     LOGIN: "/auth/login",
     REGISTER: "/auth/register",
     VALIDATE_TOKEN: "/auth/validateToken",
-    IMAGES: "/images"
+    IMAGES: "/images",
+    CHAT: "/chat"
   };
