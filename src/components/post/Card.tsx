@@ -6,6 +6,8 @@ import {colors} from "../../colors";
 import { CardProps } from '../../types/post/Types';
 import { CommentSection } from './CommentSection';
 import AddComment from './AddComment';
+import EDIT from "../../images/editMe.png";
+import ICONDELETE from "../../images/DeleteIcon.png";
 
 export default function Card(props:CardProps){
     return(
@@ -16,8 +18,19 @@ export default function Card(props:CardProps){
                 src={PROFILE}
                 alt=""
                 /> 
-             <h5 className='mt-2 ml-2 dark:text-white'>{props.post.user.firstName} {props.post.user.lastName}</h5>
-            </div>   
+             <h5 className='mt-2 ml-2 mr-auto dark:text-white'>{props.post.user.firstName} {props.post.user.lastName}</h5>
+                 {props.isProfile && (
+                <div className='m-auto'>
+                 <button onClick={() => props.handleEdit(props.post)} className='ml-10 mr-2'>
+                        <img src={EDIT} alt="edit" className='w-5 h-5' />
+                    </button>
+                    <button onClick={() => props.handleDelete(props.post.id)}>
+                        <img src={ICONDELETE} alt="delete" className='w-6 h-6 bg-red' />
+                    </button>
+            </div> 
+            )}
+            </div>
+           
             <div className='flex flex-col items-left mt-1 ml-10 mr-10'>
                 <p className='mb-3 dark:text-white'>{props.formatContent(props.post.content)}</p>
                 {props.post.images[0]!==undefined &&

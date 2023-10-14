@@ -6,6 +6,7 @@ import { CardContainer } from "./CardContainer";
 import { STATE } from "../states";
 import Spinner from "../components/spinner/Spinner";
 import { Message } from "../components/modal/Message";
+import { Post } from "../types/post/Types";
 import ChatAppContainer from "./ChatContainer";
 
 
@@ -18,6 +19,12 @@ export const HomeContainer = () => {
    }
   const { status, posts, error } = useGetPosts(search);
   console.log(status);  
+  const handleEdit = (post : Post) => {
+
+  }
+  const handleDelete = (postId: string) => {
+
+  }
   return(
     <>
     <NavBar search={search} changeSearch={changeSearch} />
@@ -26,7 +33,7 @@ export const HomeContainer = () => {
     {
       status===STATE.LOADING ? <Spinner/> :
             posts.map((post,index)=>{
-             return <CardContainer key={index}  post={post} isProfile={false} />
+             return <CardContainer key={index}  post={post} isProfile={false} handleEdit={handleEdit} handleDelete={handleDelete} />
             })
     }
     {

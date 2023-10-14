@@ -33,10 +33,14 @@ export type CardProps={
      getImageFromBytes: (image: string) => string;
      formatContent: (content: string) => JSX.Element[]|JSX.Element;
      isProfile: boolean;
+     handleEdit: (post : Post) => void;
+     handleDelete: (postId: string)=> void;
 }
 export type CardContainerProps={
   post: Post;
 isProfile: boolean;
+handleEdit: (post : Post) => void;
+handleDelete:(postId: string) => void;
 }
 export type AddCommentProps={
      register:UseFormRegister<AddCommentForm>;

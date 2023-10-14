@@ -9,6 +9,8 @@ import useEditPost from "../hooks/post/useEditPost";
 import PopupDeletePost from "../components/profile/DeletePost";
 import PopupEditPost from "../components/profile/UpdatePost";
 import useDeletePost from "../hooks/post/useDeletePost";
+import extractYearMonthDayFromDate from "../components/utils/GetYearFromDate";
+import { useNavigate } from "react-router-dom";
 
 const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statusPost : string}) => {
 
@@ -18,6 +20,7 @@ const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statu
     const [postId , setPostId] = useState<string>("");
     const [content, setContent] = useState<string>('');
     const [image, setImage] = useState<any>();
+    const navigate = useNavigate();
 
      const {updatePostMutation} = useEditPost();
      const {deletePostMutation} = useDeletePost();
@@ -29,7 +32,6 @@ const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statu
         const post_id : string = selectedPost?.id ?? "";
         updatePostMutation.mutateAsync({postId:post_id, userId:userId , content:content,image:image,tags:tagsString});
         handlePopup();
-        console.log("updatitiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
     }
     const changeContent = (e:any) => {
         setContent(e.target.value);
@@ -60,23 +62,32 @@ const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statu
     const submitPostToDelete = () => {
         deletePostMutation.mutateAsync(postId);
         handleDeletePopup();
-        console.log("deleteddddddddddddddddddddddd");
+    
     }
+    const handleClickToHome = () => {
+        navigate("/");
+    }
+    
+    const userCreation = extractYearMonthDayFromDate(user.createdAt);
     return(
         <>
-        <div className="flex flex-col border-1">
-            <div className="flex items-center bg-gray-200 p-12 mb-6">
+        <div className="flex flex-col w-2/3 ">
+
+          <div className="flex items-center border-b-2 p-12 mb-6">
                 <div className="flex flex-col m-auto">
-                    <div className="flex justify-around">
+                    <div className="flex items-baseline justify-around">
                         <p>What's on your mind today barry ?</p>
+                        <button onClick={handleClickToHome} className="ml-20 w-auto h-auto text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">Home</button>
+
                     </div>
-                    <div>
+                    <div className="flex justify-around">
                         <AddPostContainer />
                     </div>
 
                 </div>
             </div>
-            <div className="flex flex-col m-auto">
+
+            <div className="flex flex-col  m-auto">
                 {statusPost && statusPost === "loading" && (
                     <div role="status">
                         <svg aria-hidden="true" className="inline w-10 h-10 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,18 +100,8 @@ const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statu
                  {statusPost === "success" && myPosts && myPosts.length > 0 &&
                      myPosts.map((post,index)=>{
                         
-                    return(
-                        <div key={index} className="relative">
-                            <CardContainer post={post} isProfile={true} />
-                            <div className="absolute top-0 right-16 m-2 pt-6 pr-16 space-x-2">
-                                <button onClick={() => handleEdit(post)} className='mr-2'>
-                                    <img src={EDIT} alt="edit" className='w-6 h-6' />
-                                </button>
-                                <button onClick={() => handleDelete(post.id)}>
-                                    <img src={ICONDELETE} alt="delete" className='w-7 h-7 bg-red' />
-                                </button>
-                            </div>
-                        </div>
+                    return(                                   
+                            <CardContainer key={index} post={post} isProfile={true} handleEdit={handleEdit} handleDelete={handleDelete} />                            
                     ) 
                     })
                  }

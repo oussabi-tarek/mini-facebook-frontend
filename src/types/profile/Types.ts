@@ -1,4 +1,5 @@
-import { User } from "../Types";
+import { Post } from "../post/Types";
+import { Image, User } from "../Types";
 
 export type PopupEditUserProps={
     handlePopup :() =>  void;
@@ -12,10 +13,20 @@ export type updateUserInput={
     lastName:string;
     email: string;
     location: string;
-    biography: string;
 }
 
 export type AsideProfileProps={
     user : User;
-    updateUserClick: void;
+    updateUserClick:(userId: string, user: updateUserInput) => void;
+    posts: Post[];
+    userProfile: any;
+    status: string;
+    handleProfileChange: () => void;
+
+}
+
+export type PopupProfileProps={
+    handleFileChange: (event : any) => void;
+    submitProfileChange : (event : any) => void;
+    handlePopup: () => void;
 }

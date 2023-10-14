@@ -2,7 +2,7 @@ import { AxiosInstance } from "axios";
 import { ENDPOINTS } from "../endpoint";
 import { User } from "../../types/Types";
 import { useAxios } from "../axios/useAxios";
-import {  useMutation } from "@tanstack/react-query";
+import {  useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateUserInput } from "../../types/profile/Types";
 
 const updateUserFn = async (axios : AxiosInstance, user: updateUserInput, userId: string) => {
@@ -14,9 +14,14 @@ const updateUserFn = async (axios : AxiosInstance, user: updateUserInput, userId
 
 const useUpdateUser = () => {
     const {axios} = useAxios();
-   
+    const queryClient =  useQueryClient();
     const updateUserMutation = useMutation<User, Error, { user: updateUserInput; userId: string }>(
-        (params) => updateUserFn(axios, params.user, params.userId)
+        (params) => updateUserFn(axios, params.user, params.userId),
+        {
+             onSuccess: (data) => {
+                queryClient.invalidateQueries(["fetch"]);
+            },
+        }
     );
 
     return {updateUserMutation}

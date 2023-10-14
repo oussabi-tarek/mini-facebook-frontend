@@ -32,13 +32,7 @@ const PopupEditProfile = (props: PopupEditUserProps) => {
                 <div className="mb-3">
                     <label htmlFor="location" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location</label>
                     <input id="location" defaultValue={props.user.location} {...register("location")} placeholder="Marrakech, Sidi Abbad" className="block w-full bg-black text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="text" />
-                </div>  
-
-                <div className="mb-3">
-                    <label htmlFor="bio" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">About You</label>
-                    <textarea id="bio" defaultValue={props.user.biography} {...register("biography")} rows={9} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Am Mr X, from ..."></textarea>
-                </div>
-               
+                </div>       
                 <div className="grid justify-items-end">
                     <button className= "mt-1 mr-1 bg-blue-700 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-full" type="submit">
                         Update
