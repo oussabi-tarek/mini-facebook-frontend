@@ -40,7 +40,7 @@ export default function LoginForm(){
                     {...register("password", {
                         required:{value: true, message: "Password is required"},
                     })}
-                    className={`border ${formState.errors.email?`border-red-500`:`border-gray-400`} rounded w-full text-gray-500 mr-3 py-3 px-2 leading-tight focus:outline-none`}
+                    className={`border ${formState.errors.password?`border-red-500`:`border-gray-400`} rounded w-full text-gray-500 mr-3 py-3 px-2 leading-tight focus:outline-none`}
                     type="password" 
                     placeholder="Password"/>
                 <span className="text-red-500">{formState.errors.password?.message}</span>

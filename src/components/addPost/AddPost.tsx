@@ -2,11 +2,11 @@ import PROFILE from '../../images/profile.png'
 import { AiOutlinePlus } from 'react-icons/ai';
 import { AddPostProps } from '../../types/Types';
 import React from 'react';
-import Typed from 'typed.js';
+//import Typed from 'typed.js';
 
 export default function AddPost(props:AddPostProps) {
   const el = React.useRef(null);
-  React.useEffect(() => {
+  /*React.useEffect(() => {
     const typed = new Typed(el.current, {
       strings: ['Add new post'],
       typeSpeed: 50,
@@ -16,7 +16,7 @@ export default function AddPost(props:AddPostProps) {
     return () => {
       typed.destroy();
     };
-  }, []);
+  }, []);*/
 return(
     <div className='flex flex-row items-center justify-center m-4 '>
        <div><button>
