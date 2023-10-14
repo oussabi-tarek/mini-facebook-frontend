@@ -1,4 +1,4 @@
-
+import { AxiosInstance } from "axios";
 import { Post } from "./post/Types"
 import { Field, FieldError, FieldErrors, Merge, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from "react-hook-form"
 
@@ -107,4 +107,23 @@ export type AddCommentForm={
 export type MessageProps={
     message:string;
     action:string;
+}
+export type MessageListProps={
+    listMessage: {message: string, isUser:boolean}[]
+}
+export type MessageInputProps={
+    message: string,
+    setMessage: (message: string) => void,
+    sendMessage: ( axios: AxiosInstance, formData: FormData) => Promise<void>,
+    addMessage: (message: string, isUser: boolean) => void
+}
+export interface Message {
+    prompt: string,
+    isUser: boolean
+}
+export interface MessageInputProp {
+    onSendMessage : (message: string) => void
+}
+export type ChatBotHeaderProps={
+    closeChatBot: () => void
 }
