@@ -44,7 +44,7 @@ const AsideProfile = (props: AsideProfileProps) => {
                  <div className='flex flex-col'>
                  
                 <div className='flex relative'>
-                    <img src={getImageFromBytes(props.user.profile.imageBytes) }  alt="user" className='w-36 h-36 relative rounded-full' />
+                    <img src={props.user.profile!==null?getImageFromBytes(props.user.profile.imageBytes):PROFILE}  alt="user" className='w-36 h-36 relative rounded-full' />
                     <div className="absolute top-1/2 left-40 transform -translate-x-1/2 -translate-y-1/2">
                         <button
                             className="text-white rounded-full p-2"

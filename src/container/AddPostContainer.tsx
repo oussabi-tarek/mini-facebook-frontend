@@ -4,11 +4,11 @@ import PopupAddPost from "../components/addPost/PopupAddPost";
 import useInsertPost from "../hooks/post/useInsertPost";
 import authContext from "../context/AuthContextProvider";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { AddPostForm } from "../types/Types";
+import { AddPostContainerProps, AddPostForm } from "../types/Types";
 import { Message } from "../components/modal/Message";
 import { STATE } from "../states";
 
-export const AddPostContainer = () => {
+export const AddPostContainer = (props: AddPostContainerProps) => {
     const [showPopup, setShowPopup] = useState(false);
     const {insertPostMutation}=useInsertPost();
 
@@ -43,7 +43,7 @@ export const AddPostContainer = () => {
 
   return(
     <>
-    <AddPost addPostClick={addPostClick}/>
+    <AddPost addPostClick={addPostClick} user={props.user}/>
     {
     showPopup && <PopupAddPost onSubmit={onSubmit} errors={errors} handleSubmit={handleSubmit} register={register} 
      closePopupClick={closePopupClick}  /> 

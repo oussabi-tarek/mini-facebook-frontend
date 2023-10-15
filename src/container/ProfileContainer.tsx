@@ -36,7 +36,11 @@ function ProfileContainer(){
     }
     const handleUpdateProfile = (event : any) => {
         event.preventDefault();
-        updateProfile.mutateAsync({ image: profileImage, userId: user.authState.userId });
+        updateProfile.mutateAsync({ image: profileImage, userId: user.authState.userId }, {
+            onSuccess:() => {
+                setPopupProfile(false);
+            }
+        });
     }
 
    const handleFileChange = (event : any) => {

@@ -17,12 +17,15 @@ export default function AddPost(props:AddPostProps) {
       typed.destroy();
     };
   }, []);
+  const getImageFromBytes=(imageBytes:string)=>{
+    return "data:image/jpeg;base64,"+imageBytes;
+}
 return(
     <div className='flex flex-row items-center justify-center m-4 '>
        <div><button>
        <img
         className="h-9 w-9 rounded-full mr-2"
-        src={PROFILE}
+        src={props.user!=undefined && props.user.profile !== null ? getImageFromBytes(props.user.profile.imageBytes):PROFILE}
         alt=""
         /></button>
        </div>

@@ -81,7 +81,7 @@ const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statu
 
                     </div>
                     <div className="flex justify-around">
-                        <AddPostContainer />
+                        <AddPostContainer user={user}/>
                     </div>
 
                 </div>

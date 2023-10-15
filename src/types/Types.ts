@@ -4,6 +4,7 @@ import { Field, FieldError, FieldErrors, Merge, SubmitHandler, UseFormHandleSubm
 
 export type AddPostProps={
     addPostClick:()=>void;
+    user: User
 }
 export type FormHeaderProps={
     closePopupClick:()=>void
@@ -68,6 +69,7 @@ export type SearchProps={
 export type NavBarProps={
     search:string;
     changeSearch:(value:string)=>void;
+    user: User
 }
 
 export type LoginInputs = {
@@ -126,4 +128,7 @@ export interface MessageInputProp {
 }
 export type ChatBotHeaderProps={
     closeChatBot: () => void
+}
+export type AddPostContainerProps ={
+    user: User
 }
