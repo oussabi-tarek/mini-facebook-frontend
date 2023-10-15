@@ -6,16 +6,21 @@ import { useAxios } from "../../hooks/axios/useAxios";
 import { LoginInputs } from "../../types/Types";
 import {sendLogin} from "../../hooks/login/useLogin";
 import Spinner from "../spinner/Spinner";
+import Alert from "../alerts/Alert";
 
 export default function LoginForm(){
     const {register, handleSubmit, formState} = useForm<LoginInputs>();
     const authenticationContext = useContext(authContext);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(false);
     
     const onSubmit = async (data: LoginInputs) => {
+        setIsLoading(true);
+        setError(false);
         try{
             await sendLogin(
                 authenticationContext,
-                {email:data.email, password:data.password});
+                {email:data.email, password:data.password}, setIsLoading, setError);
         }catch(error){
             console.log(error);
         }
@@ -24,6 +29,7 @@ export default function LoginForm(){
         <form
             onSubmit={handleSubmit(onSubmit)}
             className="w-full max-w-md mx-auto mb-12 px-4">
+                {error && <Alert title="Error! " message="Incorrect informations"/>}
             <div className="mb-5">
                 <input
                     {...register("email", {
@@ -53,7 +59,7 @@ export default function LoginForm(){
                     </a>
             </div>
             <ButtonSubmitForm        
-                textButton={"LOGIN"}/>
+                textButton={"LOGIN"} loading={isLoading}/>
         </form>
     )
 }

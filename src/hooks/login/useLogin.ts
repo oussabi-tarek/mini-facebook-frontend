@@ -20,7 +20,7 @@ const login = async (
     return response;
 }
 
-export const sendLogin = ( authenticationContext: AuthContext, formData:{email: string, password:string}) => {
+export const sendLogin = ( authenticationContext: AuthContext, formData:{email: string, password:string}, setIsLoading: React.Dispatch<React.SetStateAction<any>>, setError: React.Dispatch<React.SetStateAction<any>>) => {
     const axiosInstance = axios.create({
         baseURL: process.env.REACT_APP_VITE_API_BASE_URL,
       });
@@ -34,8 +34,11 @@ export const sendLogin = ( authenticationContext: AuthContext, formData:{email: 
         const name = response.data.user.lastName +" "+ response.data.user.lastName;
         const email = response.data.user.email;
         authenticationContext.globalLogInDispatch({authToken,refreshToken,userId,name,email});
+        setIsLoading(false);
     })
     .catch(error =>{
+        setError(true)
+        setIsLoading(false);
         console.log(error);
     });
 }
