@@ -13,7 +13,7 @@ const updatePostFn = async (
     const postCommand={
         content:formData.content,
         userId:formData.userId,
-        tags:formData.tags==="" ? "[]":formData.tags,
+        tags:formData.tags==="" ? []:formData.tags,
     }
     console.log("here:"+JSON.stringify(postCommand));
     form.append("file", formData.image);
