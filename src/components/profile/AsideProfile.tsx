@@ -26,8 +26,8 @@ const AsideProfile = (props: AsideProfileProps) => {
         const numUnlikedPosts = userPosts.filter((post) => post.unLikes.length > 0).length ?? 0;
         
         setTotalPost(numTotalPosts);
-        setLikedPercent((numLikedPosts / numTotalPosts) *100);
-        setUnlikedPercent((numUnlikedPosts / numLikedPosts) *100);
+        setLikedPercent(numTotalPosts>0?(numLikedPosts / numTotalPosts) *100:0);
+        setUnlikedPercent(numTotalPosts>0?(numUnlikedPosts / numLikedPosts) *100:0);
     }, [props.posts])
     
     const getImageFromBytes=(imageBytes:string)=>{
