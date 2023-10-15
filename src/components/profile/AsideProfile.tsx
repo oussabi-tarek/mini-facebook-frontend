@@ -15,6 +15,7 @@ const AsideProfile = (props: AsideProfileProps) => {
     const [showPopup, setShowPopup] = useState<boolean>(false);
 
     const handlePopup = () => setShowPopup(!showPopup);
+    console.log("props : ", props);
 
     useEffect(() => {
         const userPosts : Post[] = props.posts??[];
@@ -29,8 +30,6 @@ const AsideProfile = (props: AsideProfileProps) => {
         setUnlikedPercent((numUnlikedPosts / numLikedPosts) *100);
     }, [props.posts])
     
-    const USERPICTURE = props.status==="success" ? props.userProfile: PROFILE;
-
     const getImageFromBytes=(imageBytes:string)=>{
         return "data:image/jpeg;base64,"+imageBytes;
     }
@@ -45,7 +44,7 @@ const AsideProfile = (props: AsideProfileProps) => {
                  <div className='flex flex-col'>
                  
                 <div className='flex relative'>
-                    <img src={props.userProfile ? PROFILE : getImageFromBytes(USERPICTURE.imageBytes)} alt="user" className='w-36 h-36 relative rounded-full' />
+                    <img src={getImageFromBytes(props.user.profile.imageBytes) }  alt="user" className='w-36 h-36 relative rounded-full' />
                     <div className="absolute top-1/2 left-40 transform -translate-x-1/2 -translate-y-1/2">
                         <button
                             className="text-white rounded-full p-2"
@@ -66,11 +65,11 @@ const AsideProfile = (props: AsideProfileProps) => {
                             <div>POSTs</div>
                         </div>
                         <div className='text-center mr-auto'>
-                            <div className="font-bold">{likedPercent}%</div>
+                            <div className="font-bold">{ likedPercent ? likedPercent : 0 }%</div>
                             <div>Liked</div>
                         </div>
                          <div className='text-center mr-auto'>
-                            <div className="font-bold">{unlikedPercent}%</div>
+                            <div className="font-bold">{unlikedPercent ? unlikedPercent:0}%</div>
                             <div>Unliked</div>
                         </div>           
                     

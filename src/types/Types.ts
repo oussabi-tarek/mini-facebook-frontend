@@ -28,6 +28,7 @@ export type User={
     createdAt:string;
     location: string;
     biography: string;
+    profile:Image;
     userPosts: Post[];
 }
 export type Like={
@@ -53,10 +54,8 @@ export type Comment={
 export type Image={
     id:string;
     url:string;
-    file:any;
     imageBytes:any;
     userId: string;
-    isNew:boolean;
 }
 export type CommentSectionProps={
    comment:Comment;

@@ -37,7 +37,7 @@ export type CardProps={
      handleDelete: (postId: string)=> void;
 }
 export type CardContainerProps={
-  post: Post;
+post: Post;
 isProfile: boolean;
 handleEdit: (post : Post) => void;
 handleDelete:(postId: string) => void;

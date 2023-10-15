@@ -15,7 +15,7 @@ export default function Card(props:CardProps){
             <div className='flex flex-row m-4'>
             <img
                 className="h-10 w-10 rounded-full"
-                src={PROFILE}
+                src={ props.post.user.profile!==null ? props.getImageFromBytes(props.post.user.profile.imageBytes):PROFILE}
                 alt=""
                 /> 
              <h5 className='mt-2 ml-2 mr-auto dark:text-white'>{props.post.user.firstName} {props.post.user.lastName}</h5>

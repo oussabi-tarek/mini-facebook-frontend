@@ -20,7 +20,7 @@ export const HomeContainer = () => {
   const { status, posts, error } = useGetPosts(search);
   console.log(status);  
   const handleEdit = (post : Post) => {
-
+   
   }
   const handleDelete = (postId: string) => {
 

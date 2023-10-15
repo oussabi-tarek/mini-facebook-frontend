@@ -31,7 +31,7 @@ export const sendLogin = ( authenticationContext: AuthContext, formData:{email: 
         const authToken = response.data.auth.access_token;
         const refreshToken = response.data.auth.refresh_token;
         const userId = response.data.user.id;
-        const name = response.data.user.lastName +" "+ response.data.user.lastName;
+        const name = response.data.user.lastName +" "+ response.data.user.firstName;
         const email = response.data.user.email;
         authenticationContext.globalLogInDispatch({authToken,refreshToken,userId,name,email});
     })

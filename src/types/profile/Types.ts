@@ -19,7 +19,6 @@ export type AsideProfileProps={
     user : User;
     updateUserClick:(userId: string, user: updateUserInput) => void;
     posts: Post[];
-    userProfile: any;
     status: string;
     handleProfileChange: () => void;
 
