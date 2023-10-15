@@ -17,7 +17,7 @@ export type PopupProps={
 }
 export type AddPostForm={
     content:string;
-    image:File;
+    image:any;
 }
 export type User={
     id:string;

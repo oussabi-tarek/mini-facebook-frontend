@@ -13,7 +13,7 @@ export default function SignUpPage(){
                 <Button 
                     text={"Do you have already an account?"}
                     textButton={"LOGIN"}
-                    link={"login"}/>
+                    link={"/login"}/>
             </div>
             <div className="md:block hidden">
                 <RighSideLoginRegister paragraph={"Please create your account"}/>

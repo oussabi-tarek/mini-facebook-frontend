@@ -24,7 +24,8 @@ export const AddPostContainer = () => {
     }
 
     const onSubmit:SubmitHandler<AddPostForm>=async(data)=>{
-      const {content,image}=data; 
+      const image=data.image[0];
+      const content=data.content;
       const tags=content.split(" ").filter(word=>word.startsWith("#"));
       const tagsString=tags.join(",");
       setShowPopup(false);

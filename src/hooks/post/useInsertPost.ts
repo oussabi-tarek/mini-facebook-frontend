@@ -10,7 +10,8 @@ const insertPostFn = async (
   ) => {
     const form = new FormData();
     formData.tags==="" ? form.append("tags","no_tags") : form.append("tags",formData.tags);
-    formData.image==="" ? form.append("image","no_image") : form.append("image",formData.image);
+    formData.image==="" ? form.append("file","no_image") : form.append("file",formData.image);
+    form.append("file",formData.image);
     form.append("content", formData.content);
     form.append("userId", formData.userId);
     const response = await axios.post(ENDPOINTS.POSTS, form,{

@@ -36,13 +36,16 @@ function ProfileContainer(){
     }
     const handleUpdateProfile = (event : any) => {
         event.preventDefault();
+        console.log("profileImage : ", profileImage);
         updateProfileMutation.mutateAsync({ image: profileImage, userId: user.authState.userId });
     }
 
    const handleFileChange = (event : any) => {
-    console.log("imaggggg:  ", event.target.files?.[0])
-        setProfileImage(event.target.files?.[0])
-      };
+        setProfileImage(event.target.files?.[0]);
+    };
+    const changeProfileImage = () => {
+      
+    }
    
    return(
         <>
