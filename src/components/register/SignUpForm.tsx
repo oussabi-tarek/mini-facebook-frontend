@@ -10,6 +10,7 @@ export default function SignUpForm(){
     const {register, handleSubmit, formState, getValues} = useForm<RegisterInputs>();
     const navigate = useNavigate();
     const [profileImage, setProfileImage] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const axiosInstance = axios.create({
         baseURL: process.env.REACT_APP_VITE_API_BASE_URL,
       });
@@ -27,6 +28,7 @@ export default function SignUpForm(){
         }
       };
     const onSubmit = async (data: RegisterInputs) => {
+        setIsLoading(true);
         const form = new FormData();
         form.append("firstName", data.firstName);
         form.append("lastName", data.lastName);
@@ -43,6 +45,7 @@ export default function SignUpForm(){
         const response = await axiosInstance.post(ENDPOINTS.REGISTER,form,config);
         if(response.status === 200){
             console.log(response.data);
+            setIsLoading(false);
             navigate("/login");
         }
     }
@@ -142,28 +145,19 @@ export default function SignUpForm(){
                             {...register("image")}
                             onChange={handleImageUpload}
                         />
+                        {profileImage &&
                         <div className="mb-3">
                             <img
                                 src={profileImage}
                                 alt="Image Profile"
                                 className="w-16 h-16 border border-gray-500 md:w-24 md:h-24 lg:w-32 lg:h-32 object-cover rounded-full"
                             />
-                        </div>
+                        </div>}
                     </div>
                 </div>
-                    <div className="flex flex-col">
-                            <textarea
-                                {...register("bibliographie", {
-                                    required:{value: true, message: "Bibliography is required"},
-                                })}
-                                rows={9}
-                                className={`input-field rounded border ${formState.errors.bibliographie?`border-red-500`:`border-gray-400`}`}
-                                placeholder="Bibliography .."/>
-                            <p className="text-red-500">{formState.errors.bibliographie?.message}</p>
-                    </div>                
             </div>
             
-            <ButtonSubmitForm textButton={"SIGN UP"}/>
+            <ButtonSubmitForm textButton={"SIGN UP"} loading={isLoading}/>
         </form>
     )
 }
