@@ -5,12 +5,14 @@ import { ENDPOINTS } from "../../hooks/endpoint";
 import { RegisterInputs } from "../../types/Types";
 import axios from "axios";
 import {useState} from "react";
+import Alert from "../alerts/Alert";
 
 export default function SignUpForm(){
     const {register, handleSubmit, formState, getValues} = useForm<RegisterInputs>();
     const navigate = useNavigate();
     const [profileImage, setProfileImage] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(false);
     const axiosInstance = axios.create({
         baseURL: process.env.REACT_APP_VITE_API_BASE_URL,
       });
@@ -36,7 +38,6 @@ export default function SignUpForm(){
         form.append("password", data.password);
         form.append("image", data.image[0]);
         form.append("localisation", data.localisation);
-        form.append("bibliographie", data.bibliographie);
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -46,7 +47,10 @@ export default function SignUpForm(){
         if(response.status === 200){
             console.log(response.data);
             setIsLoading(false);
+            setError(false);
             navigate("/login");
+        }else{
+            setError(true);
         }
     }
 
@@ -54,6 +58,7 @@ export default function SignUpForm(){
         <form
             onSubmit={handleSubmit(onSubmit)}
             className="w-full p-6 mb-5 max-w-screen-md mx-auto">
+                {error && <Alert title="An error occured! " message="Try again"/>}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                 <div className="flex flex-col">
                     <input
@@ -79,16 +84,6 @@ export default function SignUpForm(){
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                 <div className="flex flex-col">
                     <input
-                        {...register("username",{
-                            required:{value: true, message: "Username is required"},
-                        })}
-                        className={`input-field rounded border ${formState.errors.username?`border-red-500`:`border-gray-400`}`}
-                        type="text"
-                        placeholder="Username"/>
-                    <p className="text-red-500">{formState.errors.username?.message}</p>
-                </div>
-                <div className="flex flex-col">
-                    <input
                         {...register("email", {
                             required:{value: true, message: "Email is required"},
                             pattern:{value:/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, message: "Invalide email format"}}
@@ -97,6 +92,16 @@ export default function SignUpForm(){
                         type="email"
                         placeholder="Email"/>
                     <p className="text-red-500">{formState.errors.email?.message}</p>
+                </div>
+                <div className="flex flex-col">
+                    <input
+                        {...register("localisation",{
+                            required:{value: true, message: "Localisation is required"},
+                        })}
+                        className={`input-field rounded border ${formState.errors.localisation?`border-red-500`:`border-gray-400`}`}
+                        type="text" 
+                        placeholder="Localisation"/>
+                    <p className="text-red-500">{formState.errors.localisation?.message}</p>
                 </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
@@ -125,14 +130,6 @@ export default function SignUpForm(){
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                 <div className="flex flex-col">
-                    <input
-                        {...register("localisation",{
-                            required:{value: true, message: "Localisation is required"},
-                        })}
-                        className={`input-field rounded border ${formState.errors.localisation?`border-red-500`:`border-gray-400`}`}
-                        type="text" 
-                        placeholder="Localisation"/>
-                    <p className="text-red-500">{formState.errors.localisation?.message}</p>
                     <div className="mb-3 md:mr-3">
                         <label htmlFor="profileImage" className="block text-gray-500 font-medium mb-1">
                             Profile Image
