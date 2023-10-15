@@ -16,7 +16,7 @@ function ProfileContainer(){
      
 
     const [popupProfile, setPopupProfile] = useState(false);
-    const [profileImage, setProfileImage] = useState<any>("");
+    const [profileImage, setProfileImage] = useState(null);
 
     
     const {status, userData, error} = useGetUser(user.authState.userId);
@@ -24,7 +24,7 @@ function ProfileContainer(){
     const {statusProfile, userProfile} = useGetProfile(user.authState.userId);
     const {statusPost, posts} = useGetUserPosts(user.authState.userId);
     const {updateUserMutation} = useUpdateUser();
-    const {updateProfileMutation} = useUpdateProfile();
+    const {updateProfile} = useUpdateProfile();
 
     const handlePopup = () => setPopupProfile(!popupProfile);
 
@@ -36,8 +36,7 @@ function ProfileContainer(){
     }
     const handleUpdateProfile = (event : any) => {
         event.preventDefault();
-        console.log("profileImage : ", profileImage);
-        updateProfileMutation.mutateAsync({ image: profileImage, userId: user.authState.userId });
+        updateProfile.mutateAsync({ image: profileImage, userId: user.authState.userId });
     }
 
    const handleFileChange = (event : any) => {

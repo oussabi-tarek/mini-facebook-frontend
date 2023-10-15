@@ -1,32 +1,38 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useAxios } from "../axios/useAxios";
 import { AxiosInstance } from "axios";
 import { ENDPOINTS } from "../endpoint";
-import { Image } from "../../types/Types";
-import { useAxios } from "../axios/useAxios";
-import {  QueryClient, useMutation, useQueryClient } from "@tanstack/react-query";
 
-const updateProfileFn = async (axios : AxiosInstance, image : any, userId: string) => {
-    try{
-            const response = await axios.put(`${ENDPOINTS.IMAGES}/user/${userId}`, image, {
-                  headers: {
+
+const updateProfileFn = async (
+    axios: AxiosInstance,
+    formData: { userId:string ,image:any}
+  ) => {
+    const form = new FormData();
+    form.append("file", formData.image);
+    const response = await axios.put(`${ENDPOINTS.IMAGES}/user/${formData.userId}`, form,{
+        headers: {
             "Content-Type": "multipart/form-data",
           },
-            });
-            return response.data;
-    }catch(error : any) {throw error}
-}
+    });
+    return response.data;
+  };
+
 
 const useUpdateProfile = () => {
-    const {axios} = useAxios();
+    const { axios } = useAxios();
     const queryClient = useQueryClient();
-    const updateProfileMutation = useMutation<Image, Error, { image: any; userId: string }>(
-        (params) => updateProfileFn(axios, params.image, params.userId),
-        {
-            onSuccess: (data) => {
+
+    const updateProfile=useMutation({
+            mutationFn:(formData:{userId: string,image:any}) =>
+            updateProfileFn(axios, formData),
+            onSuccess:async()=>{
                 queryClient.invalidateQueries(["fetchOneUser"]);
-            },
+            }
+      });
+      
+        return {
+          updateProfile
         }
-    );
-    return {updateProfileMutation}
-  
 }
 export default useUpdateProfile;

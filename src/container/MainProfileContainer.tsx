@@ -19,7 +19,7 @@ const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statu
     const [selectedPost, setSelectedPost] = useState<Post>();
     const [postId , setPostId] = useState<string>("");
     const [content, setContent] = useState<string>('');
-    const [image, setImage] = useState<any>();
+    const [image, setImage] = useState(null);
     const navigate = useNavigate();
 
      const {updatePostMutation} = useEditPost();

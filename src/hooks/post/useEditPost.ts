@@ -16,6 +16,7 @@ const updatePostFn = async (
         tags:formData.tags==="" ? []:formData.tags,
         images:[]
     }
+    console.log("here:"+postCommand);
     form.append("file", formData.image);
     form.append("post",JSON.stringify(postCommand));
     const response = await axios.put(`${ENDPOINTS.POSTS}/${formData.postId}`, form,{
