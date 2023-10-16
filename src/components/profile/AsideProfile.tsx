@@ -25,13 +25,14 @@ const AsideProfile = (props: AsideProfileProps) => {
         const numLikedPosts = userPosts.filter((post) => post.likes.length > 0).length ?? 0;
         const numUnlikedPosts = userPosts.filter((post) => post.unLikes.length > 0).length ?? 0;
         const likedPerc: string = (numTotalPosts > 0 ? (numLikedPosts / numTotalPosts) * 100 : 0).toFixed(0).toString();
-        const unLikePerc = (numTotalPosts>0?(numUnlikedPosts / numLikedPosts) *100:0).toFixed().toString();
+        const unLikePerc = (numUnlikedPosts>0 && numTotalPosts>0 ?(numUnlikedPosts / numTotalPosts) *100:0).toFixed(0).toString();
         
         setTotalPost(numTotalPosts);
         setLikedPercent(likedPerc);
         setUnlikedPercent(unLikePerc);
     }, [props.posts])
     
+    console.log("location : "+props.user.location);
     const getImageFromBytes=(imageBytes:string)=>{
         return "data:image/jpeg;base64,"+imageBytes;
     }
@@ -118,6 +119,7 @@ const AsideProfile = (props: AsideProfileProps) => {
                                     name="location"
                                     type="text"
                                     readOnly
+                                    placeholder='Marrakech, Sidi Abbad'
                                     value={props.user.location}
                                     className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                                 />              

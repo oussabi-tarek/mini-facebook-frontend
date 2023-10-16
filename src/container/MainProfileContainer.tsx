@@ -11,6 +11,8 @@ import PopupEditPost from "../components/profile/UpdatePost";
 import useDeletePost from "../hooks/post/useDeletePost";
 import extractYearMonthDayFromDate from "../components/utils/GetYearFromDate";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../components/spinner/Spinner";
+import SpinnerButton from "../components/spinner/SpinnerButton";
 
 const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statusPost : string}) => {
 
@@ -21,16 +23,19 @@ const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statu
     const [content, setContent] = useState<string>('');
     const [image, setImage] = useState(null);
     const navigate = useNavigate();
-
+    const [isLoading, setIsLoading] = useState(false);
      const {updatePostMutation} = useEditPost();
      const {deletePostMutation} = useDeletePost();
 
     const handleUpdatePost = () => {
+        setIsLoading(true);
         const userId : string = user.id;
         const tags=content.split(" ").filter(word=>word.startsWith("#"));
         const tagsString=tags.join(",");
         const post_id : string = selectedPost?.id ?? "";
-        updatePostMutation.mutateAsync({postId:post_id, userId:userId , content:content,image:image,tags:tagsString});
+        updatePostMutation.mutateAsync({postId:post_id, userId:userId , content:content,image:image,tags:tagsString},{
+            onSuccess:()=> setIsLoading(false)
+        });
         handlePopup();
     }
     const changeContent = (e:any) => {
@@ -60,7 +65,10 @@ const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statu
         handleDeletePopup();
     }
     const submitPostToDelete = () => {
-        deletePostMutation.mutateAsync(postId);
+        setIsLoading(true);
+        deletePostMutation.mutateAsync(postId, {
+            onSuccess: ()=>setIsLoading(false)
+        });
         handleDeletePopup();
     
     }
@@ -97,7 +105,7 @@ const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statu
                         <span className="sr-only">Loading...</span>
                     </div>
                 )}
-                 {statusPost === "success" && myPosts && myPosts.length > 0 &&
+                 {isLoading===false?statusPost === "success" && myPosts && myPosts.length > 0 &&
                      myPosts.map((post,index)=>{
                         
                     return(                                   
@@ -108,7 +116,7 @@ const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statu
                             handleEdit={handleEdit} 
                             handleDelete={handleDelete} />                            
                     ) 
-                    })
+                    }):<SpinnerButton />
                  }
                  {statusPost === "success" && myPosts && myPosts.length === 0 && (
                     <div className="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400">You don't have any post Yet ? Go And add one !</div>

@@ -5,9 +5,10 @@ import {Message} from "../types/Types";
 import MessageList from "../components/chat/MessageList";
 import ChatHeader from "../components/chat/ChatHeader";
 import { SiChatbot } from "react-icons/si";
+import chatbotImg from "../images/chatbotImg.jpeg";
 
 export default function ChatAppContainer(){
-    const [messages, setMessages] = useState<Message[]>([]);
+    const [messages, setMessages] = useState<Message[]>([{prompt: "Hi!👋 how can I help you?",isUser: false}]);
     const [showBot, setShowBot] = useState(false);
 
     const handleSendMessage = (message: string) => {
@@ -28,9 +29,8 @@ export default function ChatAppContainer(){
         <>
         <div className="fixed bottom-5 right-5">
             <button
-                onClick={openChatBot}
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">
-                <SiChatbot />
+                onClick={openChatBot}>
+                <img src={chatbotImg} className="h-14 w-14"/>
             </button>
         </div>
         {showBot && 
