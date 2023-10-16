@@ -232,14 +232,29 @@ export const CardContainer=(props:CardContainerProps)=>{
 
     return(
       <>
-      <Card isProfile={props.isProfile} isVisible={isVisible} likeColor={likeColor} unlikeColor={unlikeColor} 
-         formatContent={formatContent} register={register} handleSubmit={handleSubmit} errors={errors}
-         onSubmit={onSubmit}
-       changeLikeColor={changelikeColor} changeUnlikeColor={changeUnlikeColor} 
-         getImageFromBytes={getImageFromBytes}
-       changeVisibility={changeVisibility}  post={props.post} getElapsedTime={getElapsedTime} handleEdit={props.handleEdit} handleDelete={props.handleDelete} />
+      <Card
+        isProfile={props.isProfile} 
+        isVisible={isVisible} 
+        likeColor={likeColor} 
+        unlikeColor={unlikeColor} 
+        formatContent={formatContent} 
+        register={register} 
+        handleSubmit={handleSubmit} 
+        errors={errors}
+        onSubmit={onSubmit}
+        changeLikeColor={changelikeColor} 
+        changeUnlikeColor={changeUnlikeColor} 
+        getImageFromBytes={getImageFromBytes}
+        changeVisibility={changeVisibility}  
+        post={props.post} 
+        getElapsedTime={getElapsedTime} 
+        handleEdit={props.handleEdit} 
+        handleDelete={props.handleDelete} />
       {
-       showMessage.show && <Message action={showMessage.action} message={showMessage.message} />
+       showMessage.show && 
+       <Message 
+        action={showMessage.action} 
+        message={showMessage.message} />
       } 
       </>
     )

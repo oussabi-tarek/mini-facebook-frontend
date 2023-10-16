@@ -71,23 +71,23 @@ const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statu
     const userCreation = extractYearMonthDayFromDate(user.createdAt);
     return(
         <>
-        <div className="flex flex-col w-2/3 ">
-
-          <div className="flex items-center border-b-2 p-12 mb-6">
+        <div className="flex flex-col">
+          <div className="flex items-center border-b-2 p-10 mb-6">
                 <div className="flex flex-col m-auto">
                     <div className="flex items-baseline justify-around">
                         <p>What's on your mind today barry ?</p>
-                        <button onClick={handleClickToHome} className="ml-20 w-auto h-auto text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">Home</button>
-
+                        <button
+                            onClick={handleClickToHome}
+                            className="ml-20 w-auto h-auto text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">
+                                Home
+                        </button>
                     </div>
                     <div className="flex justify-around">
-                        <AddPostContainer />
+                        <AddPostContainer user={user}/>
                     </div>
-
                 </div>
             </div>
-
-            <div className="flex flex-col  m-auto">
+            <div className="mx-auto">
                 {statusPost && statusPost === "loading" && (
                     <div role="status">
                         <svg aria-hidden="true" className="inline w-10 h-10 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -101,7 +101,12 @@ const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statu
                      myPosts.map((post,index)=>{
                         
                     return(                                   
-                            <CardContainer key={index} post={post} isProfile={true} handleEdit={handleEdit} handleDelete={handleDelete} />                            
+                        <CardContainer 
+                            key={index} 
+                            post={post} 
+                            isProfile={true} 
+                            handleEdit={handleEdit} 
+                            handleDelete={handleDelete} />                            
                     ) 
                     })
                  }

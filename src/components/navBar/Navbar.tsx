@@ -28,6 +28,9 @@ export default function NavBar(props:NavBarProps) {
      document.documentElement.classList.toggle(mode);
   },[darkMode])
 
+  const getImageFromBytes=(imageBytes:string)=>{
+    return "data:image/jpeg;base64,"+imageBytes;
+  }
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -81,7 +84,7 @@ export default function NavBar(props:NavBarProps) {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src={PROFILE}
+                        src={props.user !== undefined && props.user.profile !== null ? getImageFromBytes(props.user.profile.imageBytes) : PROFILE}
                         alt=""
                       />
                     </Menu.Button>
