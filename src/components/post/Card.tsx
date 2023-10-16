@@ -12,7 +12,7 @@ import ICONDELETE from "../../images/DeleteIcon.png";
 export default function Card(props:CardProps){
     return(
         <div 
-            className={`mx-auto w-8/12 h-7/12 mb-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700`}>
+            className={`mx-auto ${props.isProfile?'w-8/12 h-7/12 mb-6':'w-6/12 h-5/12 mb-6'} bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700`}>
             <div 
                 className='flex flex-row m-4'>
                 <img
