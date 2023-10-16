@@ -5,7 +5,7 @@ export default function FormHeader(props:FormHeaderProps) {
 return(
     <div className="flex flex-row justify-between mb-1">
         <h5 className="dark:text-white">
-            Add New Post
+           {props.title}
         </h5>
         <div>
             <button className="text-3xl dark:text-white" type="button" >

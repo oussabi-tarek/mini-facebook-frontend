@@ -7,7 +7,7 @@ export default function PopupAddPost(props:PopupProps) {
     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 
     flex justify-center items-center">
         <div className="p-6 pt-4 mb-4 pb-2 bg-white dark:bg-black rounded shadow-md">
-            <FormHeader  closePopupClick={props.closePopupClick}/>
+            <FormHeader  closePopupClick={props.closePopupClick} title="Add new post"/>
             <form onSubmit={props.handleSubmit(props.onSubmit)} className="flex flex-col">            
             <div>
             <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
