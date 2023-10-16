@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { AddPostContainerProps, AddPostForm } from "../types/Types";
 import { Message } from "../components/modal/Message";
 import { STATE } from "../states";
+import Spinner from "../components/spinner/Spinner";
 
 export const AddPostContainer = (props: AddPostContainerProps) => {
     const [showPopup, setShowPopup] = useState(false);
@@ -14,7 +15,7 @@ export const AddPostContainer = (props: AddPostContainerProps) => {
 
     const userId = useContext(authContext).authState.userId ??  "";
     const [showMessage, setShowMessage] = useState({show:false, message:"",action:""});
-    
+    const [isLoading, setIsLoading] = useState(false);
     const { register, handleSubmit,formState:{ errors } } =useForm<AddPostForm>();
     const addPostClick = () => {
         setShowPopup(true);
@@ -24,14 +25,14 @@ export const AddPostContainer = (props: AddPostContainerProps) => {
     }
 
     const onSubmit:SubmitHandler<AddPostForm>=async(data)=>{
+      setIsLoading(true);
       const image=data.image[0];
       const content=data.content;
       const tags=content.split(" ").filter(word=>word.startsWith("#"));
       const tagsString=tags.join(",");
       setShowPopup(false);
       insertPostMutation.mutate({userId:userId,content:content,image:image,tags:tagsString},{
-        onSuccess: () => {
-        },
+        onSuccess: () => setIsLoading(false),
         onError: () => {
           setShowMessage({show:true, message:"Error adding post!Please try again",action:STATE.ERROR});
           setTimeout(()=>{

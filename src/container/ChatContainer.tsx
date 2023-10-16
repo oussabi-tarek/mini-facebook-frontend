@@ -7,7 +7,7 @@ import ChatHeader from "../components/chat/ChatHeader";
 import { SiChatbot } from "react-icons/si";
 
 export default function ChatAppContainer(){
-    const [messages, setMessages] = useState<Message[]>([]);
+    const [messages, setMessages] = useState<Message[]>([{prompt: "Hi!👋 how can I help you?",isUser: false}]);
     const [showBot, setShowBot] = useState(false);
 
     const handleSendMessage = (message: string) => {

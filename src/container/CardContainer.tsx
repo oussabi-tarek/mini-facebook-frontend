@@ -16,7 +16,7 @@ import { STATE } from "../states";
 export const CardContainer=(props:CardContainerProps)=>{
     const [isVisible,setIsVisible]=useState(false);
     const [likeColor,setLikeColor]=useState("");
-    const { register, handleSubmit,formState:{ errors } } =useForm<AddCommentForm>();
+    const { register, handleSubmit,formState:{ errors },reset } =useForm<AddCommentForm>();
     const [unlikeColor,setUnlikeColor]=useState("");
     const [showMessage, setShowMessage] = useState({show:false, message:"",action:""});
     const {deleteLikeMutation} =useDeleteLike();
@@ -189,6 +189,7 @@ export const CardContainer=(props:CardContainerProps)=>{
           insertCommentMutation.mutate({postId:props.post.id,userId:userId,comment:comment},
             {
               onSuccess: () => {
+                reset({comment: ''})
               },
               onError: () => {
                 setShowMessage({show:true, message:"Error adding Comment!Please try again",action:STATE.ERROR});

@@ -17,6 +17,7 @@ export default function MessageInput(props: MessageInputProp){
             <input 
                 type="text" 
                 onChange={(e)=>setMessage(e.target.value)}
+                value={message}
                 placeholder="Write your question!"
                 className="block p-1 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg border outline-none dark:bg-gray-700 dark:border-l-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" />
             <button
