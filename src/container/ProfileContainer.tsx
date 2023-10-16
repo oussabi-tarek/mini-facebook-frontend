@@ -21,7 +21,6 @@ function ProfileContainer(){
     
     const {status, userData, error} = useGetUser(user.authState.userId);
     console.log("user : ", userData);
-    const {statusProfile, userProfile} = useGetProfile(user.authState.userId);
     const {statusPost, posts} = useGetUserPosts(user.authState.userId);
     const {updateUserMutation} = useUpdateUser();
     const {updateProfile} = useUpdateProfile();
@@ -46,9 +45,6 @@ function ProfileContainer(){
    const handleFileChange = (event : any) => {
         setProfileImage(event.target.files?.[0]);
     };
-    const changeProfileImage = () => {
-      
-    }
    
    return(
         <>
@@ -59,7 +55,7 @@ function ProfileContainer(){
                     <AsideProfile 
                         user={userData!} 
                         updateUserClick={handleUpdateUser} 
-                        posts={posts}  status={statusProfile} 
+                        posts={posts}
                         handleProfileChange={handlePopup}/>
                 </div>
                 <div className="flex-1 mx-auto max-w-screen-lg">

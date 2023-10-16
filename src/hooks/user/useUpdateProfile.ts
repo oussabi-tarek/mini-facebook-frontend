@@ -9,8 +9,8 @@ const updateProfileFn = async (
     formData: { userId:string ,image:any}
   ) => {
     const form = new FormData();
-    form.append("file", formData.image);
-    const response = await axios.put(`${ENDPOINTS.IMAGES}/user/${formData.userId}`, form,{
+    form.append("imageFile", formData.image);
+    const response = await axios.put(`${ENDPOINTS.USERS}/${formData.userId}/image`, form,{
         headers: {
             "Content-Type": "multipart/form-data",
           },

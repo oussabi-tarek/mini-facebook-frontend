@@ -19,9 +19,7 @@ export type AsideProfileProps={
     user : User;
     updateUserClick:(userId: string, user: updateUserInput) => void;
     posts: Post[];
-    status: string;
     handleProfileChange: () => void;
-
 }
 
 export type PopupProfileProps={
