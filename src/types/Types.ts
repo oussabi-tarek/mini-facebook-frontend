@@ -7,7 +7,8 @@ export type AddPostProps={
     user: User
 }
 export type FormHeaderProps={
-    closePopupClick:()=>void
+    closePopupClick:()=>void;
+    title: string
 }
 export type PopupProps={
     closePopupClick:()=>void;

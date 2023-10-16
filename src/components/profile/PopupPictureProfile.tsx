@@ -8,7 +8,7 @@ const PopupPictureProfile = (props: PopupProfileProps) => {
       <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 
     flex justify-center items-center">
         <div className="p-6 pt-4 mb-4 pb-2 bg-white dark:bg-black rounded shadow-md">
-            <FormHeader  closePopupClick={props.handlePopup}/>
+            <FormHeader closePopupClick={props.handlePopup} title=""/>
             <form onSubmit={props.submitProfileChange} className="flex flex-col">            
             <div className="mb-3">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="user_avatar">Upload image</label>

@@ -10,8 +10,8 @@ import { FaCamera } from 'react-icons/fa';
 const AsideProfile = (props: AsideProfileProps) => {
 
     const [totalPost, setTotalPost] = useState<number>(0);
-    const [likedPercent, setLikedPercent] = useState<number>(0);
-    const [unlikedPercent, setUnlikedPercent] = useState<number>(0);
+    const [likedPercent, setLikedPercent] = useState("0");
+    const [unlikedPercent, setUnlikedPercent] = useState("0");
     const [showPopup, setShowPopup] = useState<boolean>(false);
 
     const handlePopup = () => setShowPopup(!showPopup);
@@ -24,10 +24,12 @@ const AsideProfile = (props: AsideProfileProps) => {
         
         const numLikedPosts = userPosts.filter((post) => post.likes.length > 0).length ?? 0;
         const numUnlikedPosts = userPosts.filter((post) => post.unLikes.length > 0).length ?? 0;
+        const likedPerc: string = (numTotalPosts > 0 ? (numLikedPosts / numTotalPosts) * 100 : 0).toFixed(0).toString();
+        const unLikePerc = (numTotalPosts>0?(numUnlikedPosts / numLikedPosts) *100:0).toFixed().toString();
         
         setTotalPost(numTotalPosts);
-        setLikedPercent(numTotalPosts>0?(numLikedPosts / numTotalPosts) *100:0);
-        setUnlikedPercent(numTotalPosts>0?(numUnlikedPosts / numLikedPosts) *100:0);
+        setLikedPercent(likedPerc);
+        setUnlikedPercent(unLikePerc);
     }, [props.posts])
     
     const getImageFromBytes=(imageBytes:string)=>{
@@ -39,18 +41,18 @@ const AsideProfile = (props: AsideProfileProps) => {
             <div className="w-full flex flex-col ">
                 <div className='fixed w-1/3 h-screen bg-gray-300 p-12'>  
                     <div className='flex flex-col'>
-                        <div className='flex relative'>
-                            <img src={props.user.profile!==null?getImageFromBytes(props.user.profile.imageBytes):PROFILE}  alt="user" className='w-36 h-36 relative rounded-full' />
-                            <div className="absolute top-1/2 left-40 transform -translate-x-1/2 -translate-y-1/2">
+                        <div className='flex'>
+                            <div className='relative'>
+                                <img src={props.user.profile!==null?getImageFromBytes(props.user.profile.imageBytes):PROFILE}  alt="user" className='w-36 h-36 m-auto  rounded-full' />
                                 <button
-                                    className="text-white rounded-full p-2"
+                                    className="absolute top-0 right-16 opacity-2 "
                                     onClick={props.handleProfileChange}
                                 >
                                     <FaCamera />
                                 </button>
-                                    <p className='text-lg mt-16 ml-16 '>{props.user.firstName + " " + props.user.lastName}</p>
+                            </div>                            
+                             <p className='text-lg font-bold pt-8 pl-0 mt-16'>{props.user.firstName + " " + props.user.lastName}</p>
 
-                            </div>
                         </div>
                     </div>
 

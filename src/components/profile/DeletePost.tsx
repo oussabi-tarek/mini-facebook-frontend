@@ -1,15 +1,14 @@
-import "../../styles/PopupEditProfile.css"
 import { PopupDeleteProps} from "../../types/post/Types";
+import FormHeader from "../addPost/FormHeader";
 
 const PopupDeletePost = (props: PopupDeleteProps ) => {
 
     return(
-    <div className="fixed inset-0 flex items-center justify-center z-50 mt-12 ">
-      <div className="custom-popup bg-white rounded-xl shadow-lg p-3 ">
-        <div className='relative'>
-             <div className="mb-12 child p-12">
+     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+        <div className="p-6 pt-4 mb-4 pb-2 w-1/2 bg-white dark:bg-black rounded shadow-md">
+            <FormHeader  closePopupClick={props.handlePopup} title="Delete Post"/>
                 <div className="flex flex-col">
-                    <div className="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+                    <div className="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-red dark:bg-gray-800 dark:text-blue-400" role="alert">
                        <div>
                             <span className="font-medium">Danger alert!</span> Are You Sure You want to delete this Post ?.
                         </div>
@@ -20,20 +19,8 @@ const PopupDeletePost = (props: PopupDeleteProps ) => {
                     </div>
                 </div>
               
-             </div>
-            <div className="absolute top-2 right-14">
-            <button
-                type="button"
-                onClick={props.handlePopup}
-                className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-            >
-                X
-            </button>
             </div>
         </div>
-     
-      </div>
-      </div>
     )
 
     

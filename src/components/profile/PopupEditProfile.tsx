@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { PopupEditUserProps, updateUserInput } from "../../types/profile/Types";
 import "../../styles/PopupEditProfile.css"
+import FormHeader from "../addPost/FormHeader";
 
 const PopupEditProfile = (props: PopupEditUserProps) => {
     const {register, handleSubmit} = useForm<updateUserInput>();
@@ -10,12 +11,12 @@ const PopupEditProfile = (props: PopupEditUserProps) => {
         props.handlePopup();
     }
 
-    return(
-    <div className="fixed inset-0 flex items-center justify-center z-50 mt-12 ">
-      <div className="custom-popup bg-white rounded-xl shadow-lg p-3 ">
-        <div className='relative'>
-             <div className="mb-6 child p-9">
-                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">    
+    return(      
+      <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 
+    flex justify-center items-center">
+        <div className="p-6 pt-4 mb-4 pb-2 w-1/2 bg-white dark:bg-black rounded shadow-md">
+            <FormHeader  closePopupClick={props.handlePopup} title="Edit Your Profile"/>
+             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">    
                 <div className="mb-3">
                     <label htmlFor="firstName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
                     <input id="firstName" defaultValue={props.user.firstName} {...register("firstName")} className="block w-full bg-black text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="text" />
@@ -39,21 +40,9 @@ const PopupEditProfile = (props: PopupEditUserProps) => {
                     </button>
                 </div>
             </form> 
-
-             </div>
-          <div className="absolute top-2 right-14">
-          <button
-            type="button"
-            onClick={props.handlePopup}
-            className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-          >
-            X
-          </button>
-          </div>
+            
         </div>
-     
-      </div>
-      </div>
+    </div>
     )
 
     

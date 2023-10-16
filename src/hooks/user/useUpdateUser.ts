@@ -18,8 +18,8 @@ const useUpdateUser = () => {
     const updateUserMutation = useMutation<User, Error, { user: updateUserInput; userId: string }>(
         (params) => updateUserFn(axios, params.user, params.userId),
         {
-             onSuccess: (data) => {
-                queryClient.invalidateQueries(["fetch"]);
+             onSuccess: async (data) => {
+                queryClient.invalidateQueries(["fetchOneUser"]);
             },
         }
     );

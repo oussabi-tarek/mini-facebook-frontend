@@ -1,7 +1,7 @@
 import { Image, User } from "../types/Types";
 import { AddPostContainer } from "./AddPostContainer";
 import { CardContainer } from "./CardContainer";
-import EDIT from "../images/editMe.png";
+import HOMEICON from "../images/home.png";
 import ICONDELETE from "../images/DeleteIcon.png";
 import { useState } from "react";
 import { Post } from "../types/post/Types";
@@ -37,7 +37,7 @@ const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statu
         setContent(e.target.value);
     }
     const changeImage=(event:any)=>{
-      setImage(event.target.files[0]);
+      setImage(event.target.files?.[0]);
     }
 
     const handlePopup = () => setShowPopup(!showPopup);
@@ -79,7 +79,7 @@ const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statu
                         <button
                             onClick={handleClickToHome}
                             className="ml-20 w-auto h-auto text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">
-                                Home
+                               <img src={HOMEICON} alt="home" className="w-6 h-6" />
                         </button>
                     </div>
                     <div className="flex justify-around">
