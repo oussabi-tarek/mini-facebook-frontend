@@ -54,12 +54,19 @@ function ProfileContainer(){
         <>
         { status === "loading" ? <Spinner/>:
         <>
-            <div className="relative grid grid-cols-12 ">
-                <div className="col-span-5">
-                    <AsideProfile user={userData!} updateUserClick={handleUpdateUser} posts={posts}  status={statusProfile}  handleProfileChange={handlePopup}/>
+            <div className="flex h-screen">
+                <div className="w-1/3">
+                    <AsideProfile 
+                        user={userData!} 
+                        updateUserClick={handleUpdateUser} 
+                        posts={posts}  status={statusProfile} 
+                        handleProfileChange={handlePopup}/>
                 </div>
-                <div className="col-span-7">
-                    <MainProfile user={userData!} posts={posts} statusPost={statusPost}/>
+                <div className="flex-1 mx-auto max-w-screen-lg">
+                    <MainProfile
+                        user={userData!}
+                        posts={posts}
+                        statusPost={statusPost}/>
                 </div>
             </div>
             {popupProfile && (

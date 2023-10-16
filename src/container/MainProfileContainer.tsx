@@ -71,9 +71,9 @@ const MainProfile = ({user, posts, statusPost} : {user: User, posts : any, statu
     const userCreation = extractYearMonthDayFromDate(user.createdAt);
     return(
         <>
-        <div className="flex flex-col w-2/3 ">
+        <div className="flex flex-col">
 
-          <div className="flex items-center border-b-2 p-12 mb-6">
+          <div className="flex items-center border-b-2">
                 <div className="flex flex-col m-auto">
                     <div className="flex items-baseline justify-around">
                         <p>What's on your mind today barry ?</p>
