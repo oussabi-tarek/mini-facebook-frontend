@@ -5,7 +5,7 @@ import {Message} from "../types/Types";
 import MessageList from "../components/chat/MessageList";
 import ChatHeader from "../components/chat/ChatHeader";
 import { SiChatbot } from "react-icons/si";
-import chatbotImg from "../images/chatbotImg.jpeg";
+import chatbotImg from "../images/chatbotImg.png";
 
 export default function ChatAppContainer(){
     const [messages, setMessages] = useState<Message[]>([{prompt: "Hi!👋 how can I help you?",isUser: false}]);
@@ -29,7 +29,7 @@ export default function ChatAppContainer(){
         <>
         <div className="fixed bottom-5 right-5">
             <button
-                onClick={openChatBot}>
+                onClick={openChatBot} className="">
                 <img src={chatbotImg} className="h-14 w-14"/>
             </button>
         </div>
