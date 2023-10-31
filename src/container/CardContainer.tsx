@@ -94,10 +94,10 @@ export const CardContainer=(props:CardContainerProps)=>{
               onSuccess: () => {
               },
               onError: () => {
-                setShowMessage({show:true, message:"Error inserting Like!Please try again",action:STATE.ERROR});
-                setTimeout(()=>{
-                  setShowMessage({show:false, message:"",action:""});
-                },2000);
+                // setShowMessage({show:true, message:"Error inserting Like!Please try again",action:STATE.ERROR});
+                // setTimeout(()=>{
+                //   setShowMessage({show:false, message:"",action:""});
+                // },2000);
               },
             });
             if(unlikeColor!==""){
@@ -106,10 +106,10 @@ export const CardContainer=(props:CardContainerProps)=>{
                   onSuccess: () => {
                   },
                   onError: () => {
-                    setShowMessage({show:true, message:"Error deleting Unlike!Please try again",action:STATE.ERROR});
-                    setTimeout(()=>{
-                      setShowMessage({show:false, message:"",action:""});
-                    },2000);
+                    // setShowMessage({show:true, message:"Error deleting Unlike!Please try again",action:STATE.ERROR});
+                    // setTimeout(()=>{
+                    //   setShowMessage({show:false, message:"",action:""});
+                    // },2000);
                   },
                 });
                 const newUnLikes=props.post.unLikes.filter((unLike)=>
@@ -124,10 +124,10 @@ export const CardContainer=(props:CardContainerProps)=>{
               onSuccess: () => {
               },
               onError: () => {
-                setShowMessage({show:true, message:"Error deleting Like!Please try again",action:STATE.ERROR});
-                setTimeout(()=>{
-                  setShowMessage({show:false, message:"",action:""});
-                },2000);
+                // setShowMessage({show:true, message:"Error deleting Like!Please try again",action:STATE.ERROR});
+                // setTimeout(()=>{
+                //   setShowMessage({show:false, message:"",action:""});
+                // },2000);
               },
             });
             props.post.likes.pop();
@@ -154,10 +154,10 @@ export const CardContainer=(props:CardContainerProps)=>{
                   onSuccess: () => {
                   },
                   onError: () => {
-                    setShowMessage({show:true, message:"Error deleting Like!Please try again",action:STATE.ERROR});
-                    setTimeout(()=>{
-                      setShowMessage({show:false, message:"",action:""});
-                    },2000);
+                    // setShowMessage({show:true, message:"Error deleting Like!Please try again",action:STATE.ERROR});
+                    // setTimeout(()=>{
+                    //   setShowMessage({show:false, message:"",action:""});
+                    // },2000);
                   },
                 });
                 const newLikes=props.post.likes.filter((like)=>
@@ -172,10 +172,10 @@ export const CardContainer=(props:CardContainerProps)=>{
               onSuccess: () => {
               },
               onError: () => {
-                setShowMessage({show:true, message:"Error deleting UnLike! Please try again",action:STATE.ERROR});
-                setTimeout(()=>{
-                  setShowMessage({show:false, message:"",action:""});
-                },2000);
+                // setShowMessage({show:true, message:"Error deleting UnLike! Please try again",action:STATE.ERROR});
+                // setTimeout(()=>{
+                //   setShowMessage({show:false, message:"",action:""});
+                // },2000);
               },
             });
             props.post.unLikes.pop();
